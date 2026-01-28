@@ -6,6 +6,942 @@
     <title>Document</title>
 </head>
 <body>
-    1
+     
+    <header>
+      ﻿
+
+<style>
+  .navbar-custom {
+    background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-brand-custom {
+    display: flex;
+    align-items: center;
+    color: white !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-brand-custom img {
+    margin-right: 10px;
+  }
+  
+  .search-container {
+    position: relative;
+    margin: 0 15px;
+    flex-grow: 1;
+    max-width: 500px;
+  }
+  
+  .search-form {
+    display: flex;
+    width: 100%;
+  }
+  
+  .search-input {
+    border-radius: 20px 0 0 20px !important;
+    padding: 8px 15px !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    background-color: rgba(255,255,255,0.2) !important;
+    color: white !important;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  .search-input::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+  }
+  
+  .search-btn {
+    border-radius: 0 20px 20px 0 !important;
+    background-color: rgba(255,255,255,0.2) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important;
+    border-left: none !important;
+    color: white !important;
+    padding: 0 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .search-btn:hover {
+    background-color: rgba(255,255,255,0.3) !important;
+  }
+  
+  .nav-link-custom {
+    color: rgba(255,255,255,0.8) !important;
+    margin: 0 5px;
+    padding: 8px 15px !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .navbar-toggler-custom {
+    border: none;
+    padding: 0.5rem;
+  }
+  
+  .navbar-toggler-icon-custom {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+  
+  @media (max-width: 991.98px) {
+    .navbar-collapse-custom {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+      padding: 20px;
+      margin: 0 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+    }
+    
+    .search-container {
+      margin: 10px 0 20px;
+      max-width: 100%;
+    }
+    
+    .nav-item {
+      margin: 8px 0;
+    }
+    
+    .nav-link-custom {
+      display: block;
+      padding: 10px 15px !important;
+    }
+  }
+
+  .bi {
+    display: inline-block;
+    vertical-align: -.125em;
+  }
+
+  .search-btn-text {
+    margin-left: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .search-btn-text {
+      display: none;
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container">
+    <a class="navbar-brand navbar-brand-custom" href="/">
+      <img src="/static/img/logo.png" width="30" height="30" alt="Логотип">
+      Школа Питона
+    </a>
+    
+    <button class="navbar-toggler navbar-toggler-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon navbar-toggler-icon-custom"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse navbar-collapse-custom" id="navbarContent">
+      <div class="search-container">
+        <form method="get" action="/search/" class="search-form">
+          <input class="form-control search-input" type="text" name="q" placeholder="Поиск по урокам..." aria-label="Search" list="pythonTerms" autocomplete="off">
+            <datalist id="pythonTerms">
+              <option value="print">
+              </option><option value="if">
+              </option><option value="else">
+              </option><option value="списки">
+              </option><option value="функция">
+              </option><option value="for">
+              </option><option value="класс">
+              <!-- Базовые операторы -->
+              </option><option value="in">
+              </option><option value="is">
+              <!-- Встроенные функции -->
+              </option><option value="len">
+              </option><option value="range">
+              </option><option value="input">
+              </option><option value="str">
+              </option><option value="int">
+              </option><option value="list">
+              </option><option value="dict">
+              <!-- Управление кодом -->
+              </option><option value="while">
+              </option><option value="break">
+              </option><option value="continue">
+              </option><option value="try">
+              </option><option value="except">
+              <!-- Структуры данных -->
+              </option><option value="словарь">
+              </option><option value="множество">
+              </option><option value="кортежи">
+              <!-- ООП -->
+              </option><option value="наследование">
+              </option><option value="__init__">
+              </option><option value="self">
+              <!-- Модули -->
+              </option><option value="import">
+              </option><option value="os">
+              <!-- Datetime -->
+              </option><option value="datetime">
+              </option><option value="time">
+              </option><option value="timedelta">
+              </option><option value="strftime">
+              </option><option value="strptime">
+              </option><option value="timezone">
+          </option></datalist>
+          <button class="btn search-btn" type="submit" aria-label="Поиск">
+            <i class="bi bi-search"></i>
+            <span class="search-btn-text">Найти</span>
+          </button>
+        </form>
+      </div>
+      
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"> 
+          <a class="nav-link nav-link-custom " href="/home/">
+            <i class="bi bi-house-door me-1"></i>Главная
+          </a>
+        </li>
+
+        <li class="nav-item"> 
+          <a class="nav-link nav-link-custom " href="/tkinter/">
+            <i class="bi bi-window me-1"></i>Tkinter
+          </a>
+        </li>
+        
+        
+        <li class="nav-item"> 
+          <a class="nav-link nav-link-custom" href="/accounts/login/">
+            <i class="bi bi-box-arrow-in-right me-1"></i>Войти</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link nav-link-custom" href="/accounts/register/">
+            <i class="bi bi-person-plus me-1"></i>Регистрация</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-collapse-custom .nav-link');
+  const navbarCollapse = document.querySelector('.navbar-collapse-custom');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+          toggle: false
+        });
+        bsCollapse.hide();
+      }
+    });
+  });
+  
+  const searchInput = document.querySelector('.search-input');
+  const searchBtn = document.querySelector('.search-btn');
+  
+  searchBtn.addEventListener('click', function(e) {
+    if (window.innerWidth < 992 && !searchInput.value.trim()) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+});
+</script>
+
+    </header>
+
+    <main class="container" style="margin-top: 40px;">
+          
+    <style>
+        pre code {
+            display: block;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .lesson-content .search-form-container {
+            all: initial !important;
+            display: flex !important;
+            height: 38px !important;
+        }
+    </style>
+    <div class="container my-5">
+        <!-- Заголовок и описание урока -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title display-4">Введение в Python</h1>
+                <p class="card-text lead">Знакомство с языком Python, установка и настройка среды разработки.</p>
+            </div>
+        </div>
+
+        <!-- Содержание урока -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="lesson-content">
+                    <h2>Введение в Python</h2>
+
+<p>Python — это современный, мощный и простой в изучении язык программирования. Он широко используется в различных областях: от веб-разработки до анализа данных и искусственного интеллекта. В этом занятии мы познакомимся с основами Python, научимся писать простые программы и разберем, как работает интерпретатор.</p>
+
+<h3>Что такое Python?</h3>
+
+<p>Python — это интерпретируемый язык программирования высокого уровня. Это означает, что код на Python выполняется построчно, без необходимости компиляции. Python был создан Гвидо ван Россумом в 1991 году и с тех пор стал одним из самых популярных языков в мире.</p>
+
+<h3>Основные особенности Python:</h3>
+
+<ul>
+	<li><strong>Простота синтаксиса</strong>: Python легко читать и писать, даже для новичков.</li>
+	<li><strong>Кроссплатформенность</strong>: Python работает на Windows, macOS, Linux и других операционных системах.</li>
+	<li><strong>Большое количество библиотек</strong>: Python имеет богатую стандартную библиотеку и множество сторонних модулей для решения различных задач.</li>
+</ul>
+
+<h3>Установка Python</h3>
+
+<p>Для начала работы с Python необходимо установить интерпретатор. Скачать его можно с официального сайта <a href="https://www.python.org/" target="_blank">python.org</a>. Ниже приведены подробные инструкции по установке Python на различные операционные системы, а также инструкции по открытию командной строки и запуску интерпретатора.</p>
+
+<h4>Как открыть командную строку</h4>
+
+<p>Перед установкой Python важно знать, как открыть командную строку (терминал) в вашей операционной системе. Это понадобится для проверки установки и запуска Python.</p>
+
+<ul>
+	<li><strong>Windows</strong>:
+
+	<ul>
+		<li>Нажмите <code>Win + R</code>, введите <code>cmd</code> и нажмите <code>Enter</code>.</li>
+		<li>Или найдите "Командная строка" через поиск в меню "Пуск".</li>
+	</ul>
+	</li>
+	<li><strong>macOS</strong>:
+	<ul>
+		<li>Откройте "Терминал" через поиск Spotlight (нажмите <code>Cmd + Пробел</code> и введите "Терминал").</li>
+		<li>Или найдите "Терминал" в папке "Утилиты".</li>
+	</ul>
+	</li>
+	<li><strong>Linux</strong>:
+	<ul>
+		<li>Нажмите <code>Ctrl + Alt + T</code> для открытия терминала.</li>
+		<li>Или найдите "Терминал" в меню приложений.</li>
+	</ul>
+	</li>
+</ul>
+
+<h4>Установка Python на Windows</h4>
+
+<ol>
+	<li>Перейдите на официальный сайт Python: <a href="https://www.python.org/downloads/windows/" target="_blank">python.org/downloads/windows/</a>.</li>
+	<li>Выберите версию Python, которую хотите установить (рекомендуется использовать последнюю стабильную версию).</li>
+	<li>Скачайте установщик (выберите между 32-битной и 64-битной версией в зависимости от вашей системы).</li>
+	<li>Запустите скачанный установщик.</li>
+	<li>На первом экране установщика убедитесь, что выбрана опция <strong>"Add Python to PATH"</strong>. Это позволит запускать Python из командной строки.</li>
+	<li>Нажмите <strong>"Install Now"</strong> для начала установки.</li>
+	<li>После завершения установки откройте командную строку (см. выше) и введите <code>python --version</code>, чтобы убедиться, что Python установлен корректно.</li>
+</ol>
+
+<h4>Установка Python на macOS</h4>
+
+<ol>
+	<li>Перейдите на официальный сайт Python: <a href="https://www.python.org/downloads/macos/" target="_blank">python.org/downloads/macos/</a>.</li>
+	<li>Скачайте последнюю версию Python для macOS.</li>
+	<li>Откройте скачанный файл <code>.pkg</code> и следуйте инструкциям установщика.</li>
+	<li>После завершения установки откройте терминал (см. выше) и введите <code>python3 --version</code>, чтобы проверить установку.</li>
+</ol>
+
+<h4>Установка Python на Linux</h4>
+
+<p>Большинство дистрибутивов Linux поставляются с предустановленным Python. Однако, если вам нужно установить другую версию, выполните следующие шаги:</p>
+
+<ol>
+	<li>Откройте терминал (см. выше).</li>
+	<li>Для установки Python на Ubuntu или Debian-based системах выполните команду:
+	<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="sudo apt update
+sudo apt install python3"><i class="bi bi-clipboard"></i></button></div><pre><code>sudo apt update
+sudo apt install python3</code></pre></div>
+	</li>
+	<li>Для установки на CentOS или Fedora выполните:
+	<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="sudo yum install python3"><i class="bi bi-clipboard"></i></button></div><pre><code>sudo yum install python3</code></pre></div>
+	</li>
+	<li>После установки проверьте версию Python с помощью команды <code>python3 --version</code>.</li>
+</ol>
+
+<h4>Как открыть интерпретатор Python</h4>
+
+<p>После установки Python вы можете запустить его интерпретатор для выполнения команд. Вот как это сделать:</p>
+
+<ul>
+	<li><strong>Windows</strong>:
+
+	<ul>
+		<li>Откройте командную строку (см. выше).</li>
+		<li>Введите <code>python</code> и нажмите <code>Enter</code>. Если Python добавлен в PATH, откроется интерпретатор.</li>
+	</ul>
+	</li>
+	<li><strong>macOS и Linux</strong>:
+	<ul>
+		<li>Откройте терминал (см. выше).</li>
+		<li>Введите <code>python3</code> и нажмите <code>Enter</code>. Откроется интерпретатор Python.</li>
+	</ul>
+	</li>
+</ul>
+
+<p>Для выхода из интерпретатора введите команду <code>exit()</code> или нажмите <code>Ctrl + D</code>.</p>
+
+<h3>Первая программа на Python</h3>
+
+<p>Давайте напишем нашу первую программу на Python. Традиционно первой программой является вывод текста "Hello, World!" на экран. В Python это делается с помощью функции <code>print()</code>.</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="print(&quot;Hello, World!&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>print("Hello, World!")</code></pre></div>
+
+<p>Эта программа выведет на экран текст <code>Hello, World!</code>. Функция <code>print()</code> используется для вывода информации на экран.</p>
+
+<h3>Вывод данных с помощью print</h3>
+
+<p>Функция <code>print()</code> может выводить несколько значений, разделенных запятыми. По умолчанию они разделяются пробелом:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="print(&quot;Имя:&quot;, &quot;Иван&quot;, &quot;Возраст:&quot;, 15)"><i class="bi bi-clipboard"></i></button></div><pre><code>print("Имя:", "Иван", "Возраст:", 15)</code></pre></div>
+
+<p>Вывод: <code>Имя: Иван Возраст: 15</code></p>
+
+<p>Можно использовать символ <code>+</code> для объединения строк:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="print(&quot;Имя: &quot; + &quot;Иван&quot; + &quot;, Возраст: &quot; + str(15))"><i class="bi bi-clipboard"></i></button></div><pre><code>print("Имя: " + "Иван" + ", Возраст: " + str(15))</code></pre></div>
+
+<p>Вывод: <code>Имя: Иван, Возраст: 15</code></p>
+
+<p>Символ <code>\n</code> используется для перевода строки:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="print(&quot;Первая строка\nВторая строка&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>print("Первая строка\nВторая строка")</code></pre></div>
+
+<p>Вывод:</p>
+
+<pre>Первая строка
+Вторая строка
+</pre>
+
+<p>Параметр <code>end</code> позволяет изменить символ, который добавляется в конце вывода (по умолчанию это <code>\n</code>):</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="print(&quot;Привет, &quot;, end=&quot;&quot;)
+print(&quot;мир!&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>print("Привет, ", end="")
+print("мир!")</code></pre></div>
+
+<p>Вывод: <code>Привет, мир!</code></p>
+
+<h3>Форматированные строки (f-строки)</h3>
+
+<p>В Python 3.6 и выше появилась удобная возможность для форматирования строк — f-строки. Они позволяют встраивать выражения внутри строки, используя фигурные скобки <code>{}</code>. Это делает код более читаемым и компактным.</p>
+
+<p>Пример использования f-строки:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="name = &quot;Иван&quot;
+age = 15
+print(f&quot;Имя: {name}, Возраст: {age}&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>name = "Иван"
+age = 15
+print(f"Имя: {name}, Возраст: {age}")</code></pre></div>
+
+<p>Вывод: <code>Имя: Иван, Возраст: 15</code></p>
+
+<p>Внутри фигурных скобок можно использовать не только переменные, но и выражения:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="a = 5
+b = 10
+print(f&quot;Сумма чисел {a} и {b} равна {a + b}&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>a = 5
+b = 10
+print(f"Сумма чисел {a} и {b} равна {a + b}")</code></pre></div>
+
+<p>Вывод: <code>Сумма чисел 5 и 10 равна 15</code></p>
+
+<p>F-строки также поддерживают форматирование чисел, дат и других типов данных. Например, можно указать количество знаков после запятой для дробных чисел:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="pi = 3.14159
+print(f&quot;Число Пи с точностью до двух знаков: {pi:.2f}&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>pi = 3.14159
+print(f"Число Пи с точностью до двух знаков: {pi:.2f}")</code></pre></div>
+
+<p>Вывод: <code>Число Пи с точностью до двух знаков: 3.14</code></p>
+
+<p>F-строки — это мощный инструмент, который упрощает работу со строками и делает код более понятным.</p>
+
+<h3>Переменные и типы данных</h3>
+
+<p>В Python переменные используются для хранения данных. Например, мы можем создать переменную <code>name</code> и присвоить ей значение:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="name = &quot;Иван&quot;"><i class="bi bi-clipboard"></i></button></div><pre><code>name = "Иван"</code></pre></div>
+
+<p>Здесь <code>name</code> — это переменная, а <code>"Иван"</code> — строка, которая хранится в этой переменной. Python автоматически определяет тип данных, поэтому нам не нужно явно указывать, что <code>name</code> — это строка.</p>
+
+<h4>Основные типы данных в Python:</h4>
+
+<ul>
+	<li><strong>Числа</strong>: целые (<code>int</code>) и дробные (<code>float</code>).</li>
+	<li><strong>Строки</strong>: последовательности символов, заключенные в кавычки (<code>str</code>).</li>
+	<li><strong>Списки</strong>: упорядоченные коллекции элементов (<code>list</code>).</li>
+	<li><strong>Словари</strong>: пары ключ-значение (<code>dict</code>).</li>
+</ul>
+
+<h3>Пример программы</h3>
+
+<p>Давайте напишем программу, которая запрашивает у пользователя его имя и выводит приветствие:</p>
+
+<div class="code-container mb-3"><div class="d-flex justify-content-between align-items-center bg-light p-2 rounded-top"><span class="text-muted">Скопировать</span><button class="btn btn-sm btn-outline-secondary copy-button" data-code="name = input(&quot;Введите ваше имя: &quot;)
+print(f&quot;Привет, {name}!&quot;)"><i class="bi bi-clipboard"></i></button></div><pre><code>name = input("Введите ваше имя: ")
+print(f"Привет, {name}!")</code></pre></div>
+
+<p>Эта программа использует функцию <code>input()</code> для ввода данных с клавиатуры и выводит приветствие с использованием форматированной строки.</p>
+
+<h3>Заключение</h3>
+
+<p>Теперь вы знаете основы Python и можете написать свою первую программу. В следующих занятиях мы углубимся в изучение языка и научимся решать более сложные задачи.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Практическая часть -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title h4 mb-3">Практика</h2>
+                <div class="lesson-content"></div>
+                    <p><strong>🎯 Миссия 1:</strong> Создать первый контакт с пользователем<br>
+<em>🔍 Контекст:</em> Даже R2-D2 пищал при знакомстве. Будьте вежливее дроида!<br>
+<br>
+<strong>⚙️ Техзадание:</strong><br>
+1. Используйте <code>input()</code> трижды<br>
+2. Рассчитайте год рождения: <code>2025 - возраст</code><br>
+3. Выведите приветствие через f-строку</p>
+
+<p>Используйте <code>name</code>, <code>age</code> и <code>color</code> как имена переменных.</p>
+
+<pre>Введите имя: Валли
+Введите возраст: 700
+Введите цвет: жёлтый
+
+Привет, Валли!
+Год рождения: 1325
+Жёлтый - тёплый выбор!</pre>
+
+<p><br>
+💡 <strong>Подсказка:</strong> <code>int(input())</code> преобразует текст в число</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Горизонтальная линия -->
+        <hr class="my-4">
+
+        <!-- Интерпретатор -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <!-- Интерпретатор -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-body">
+        <div class="container mt-3">
+            <h3 class="mb-3">Попробуйте на практике:</h3>
+            
+            <!-- Форма для ввода кода (изменим на div, чтобы не отправляла форму) -->
+            <div id="code-form">
+                <input type="hidden" name="csrfmiddlewaretoken" value="99HayIrgknd2qAImuPZx9H7oFHGmxJzhItOSczvNMpaLksXfli0urUKTX9fUCKbJ">
+                <div class="mb-3">
+                    <textarea id="code" name="code" placeholder="Введите ваш Python код здесь..." style="display: none;"></textarea><div class="CodeMirror cm-s-dracula CodeMirror-wrap" translate="no"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 4px; left: 33px;"><textarea style="position: absolute; bottom: -1em; padding: 0px; width: 1px; height: 1em; min-height: 1em; outline: none;" wrap="off" autocorrect="off" autocapitalize="none" spellcheck="false" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" tabindex="-1" cm-not-content="true"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" tabindex="-1" cm-not-content="true"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="true"><div class="CodeMirror-sizer" style="margin-left: 29px; margin-bottom: -17px; border-right-width: 33px; min-height: 29px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div style="position: relative; outline: none;" role="presentation"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 21px;">&nbsp;</div></div><div class="CodeMirror-code" role="presentation"><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -29px;" aria-hidden="true"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 21px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation"><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 33px; width: 1px; border-bottom: 0px solid transparent; top: 29px;"></div><div class="CodeMirror-gutters" style="height: 62px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 29px;"></div></div></div></div>
+                </div>
+                <div class="mb-3" id="input-section" style="display: none;">
+                    <div class="input-group">
+                        <span class="input-group-text bg-primary text-white" id="input-prompt">
+                            <i class="bi bi-arrow-return-right me-2"></i>
+                            <span id="prompt-text"></span>
+                        </span>
+                        <input type="text" id="user_input" class="form-control" placeholder="Введите значение..." aria-describedby="input-prompt">
+                        <button type="button" class="btn btn-primary" id="submit-button" disabled="">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </div>
+                    <div class="form-text text-muted mt-1">Нажмите Enter для отправки</div>
+                </div>
+
+                <!-- Кнопки управления -->
+                <div class="mb-3">
+                    <div class="btn-group d-flex flex-nowrap overflow-auto"> <!-- Горизонтальный скролл на узких экранах -->
+                        <button type="button" class="btn btn-primary text-nowrap" id="run-button">
+                            <i class="bi bi-play-fill me-1"></i>
+                            <span id="button-text">Выполнить</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
+                        </button>
+                        <button type="button" class="btn btn-success text-nowrap" id="check-button">
+                            <i class="bi bi-check-circle me-1"></i>
+                            <span id="check-button-text">Проверить</span>
+                            <span id="check-spinner" class="spinner-border spinner-border-sm d-none ms-1"></span>
+                        </button>
+                        <button type="button" class="btn btn-outline-dark text-nowrap" id="clear-button">
+                            <i class="bi bi-trash me-1"></i>
+                            Очистить
+                        </button>
+                    </div>
+                </div>
+
+                <input type="hidden" id="user_inputs" name="user_inputs">
+            </div>
+
+            <!-- Блок вывода -->
+            <h4 class="mt-3">Результат:</h4>
+            <div class="card bg-light">
+                <div class="card-body p-3">
+                    <pre id="output" class="mb-0"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подключаем CodeMirror (остаётся без изменений) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+<style>
+    /* Стили остаются без изменений */
+    .CodeMirror {
+        height: auto;
+        border: 1px solid #ddd;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+    .CodeMirror-scroll {
+        min-height: 150px;
+        max-height: 300px;
+    }
+    #output {
+        white-space: pre-wrap;
+        background-color: transparent;
+        padding: 0;
+        border: none;
+    }
+    #input-section {
+        margin-top: 15px;
+    }
+    #input-prompt {
+        min-width: 120px;
+        font-weight: 500;
+    }
+    #user_input:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .input-group-text {
+        transition: all 0.3s ease;
+    }
+    #submit-button {
+        transition: all 0.3s ease;
+    }
+    #submit-button:not(:disabled) {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+</style>
+
+<script>
+    // Инициализация CodeMirror (без изменений)
+    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        lineNumbers: true,
+        mode: 'python',
+        theme: 'dracula',
+        indentUnit: 4,
+        tabSize: 4,
+        indentWithTabs: false,
+        extraKeys: {
+            'Tab': 'indentMore',
+            'Shift-Tab': 'indentLess',
+            'Ctrl-Enter': runCode,
+            'Cmd-Enter': runCode
+        },
+        autoCloseBrackets: true,
+        matchBrackets: true,
+        lineWrapping: true
+    });
+
+    // Функция для выполнения кода (без изменений)
+    async function runCode() {
+        const code = editor.getValue();
+        const outputElement = document.getElementById('output');
+        const buttonText = document.getElementById('button-text');
+        const spinner = document.getElementById('spinner');
+
+        document.getElementById('user_inputs').value = JSON.stringify([]);
+        document.getElementById('input-section').style.display = 'none';
+
+        buttonText.textContent = 'Выполнение...';
+        spinner.classList.remove('d-none');
+        document.getElementById('run-button').disabled = true;
+
+        try {
+            const response = await fetch('/interpreter/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '99HayIrgknd2qAImuPZx9H7oFHGmxJzhItOSczvNMpaLksXfli0urUKTX9fUCKbJ'
+                },
+                body: `code=${encodeURIComponent(code)}&user_inputs=${encodeURIComponent('[]')}`
+            });
+
+            const data = await response.json();
+            
+            if (data.status === "input_required") {
+                document.getElementById('input-section').style.display = 'block';
+                document.getElementById('prompt-text').textContent = data.prompt || "Ввод:";
+                document.getElementById('user_input').focus();
+                outputElement.textContent = "";
+            } else {
+                outputElement.textContent = data.output;
+            }
+        } catch (error) {
+            outputElement.textContent = `Ошибка: ${error}`;
+        } finally {
+            buttonText.textContent = 'Выполнить';
+            spinner.classList.add('d-none');
+            document.getElementById('run-button').disabled = false;
+        }
+    }
+
+    // Функция для проверки кода (без изменений)
+    async function checkCode() {
+        const code = editor.getValue();
+        const outputElement = document.getElementById('output');
+        const checkButtonText = document.getElementById('check-button-text');
+        const checkSpinner = document.getElementById('check-spinner');
+
+        checkButtonText.textContent = 'Проверка...';
+        checkSpinner.classList.remove('d-none');
+        document.getElementById('check-button').disabled = true;
+
+        try {
+            const response = await fetch('/check_code/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '99HayIrgknd2qAImuPZx9H7oFHGmxJzhItOSczvNMpaLksXfli0urUKTX9fUCKbJ'
+                },
+                body: `code=${encodeURIComponent(code)}&slug=${encodeURIComponent('vvedenie-v-python')}`
+            });
+
+            const data = await response.json();
+            outputElement.textContent = data.evaluation || data.output;
+        } catch (error) {
+            outputElement.textContent = `Ошибка: ${error}`;
+        } finally {
+            checkButtonText.textContent = 'Проверить';
+            checkSpinner.classList.add('d-none');
+            document.getElementById('check-button').disabled = false;
+        }
+    }
+
+    // Функция для отправки ввода пользователя (без изменений)
+    async function submitInput() {
+        const userInput = document.getElementById('user_input').value;
+        const outputElement = document.getElementById('output');
+
+        const userInputs = JSON.parse(document.getElementById('user_inputs').value || '[]');
+        userInputs.push(userInput);
+        document.getElementById('user_inputs').value = JSON.stringify(userInputs);
+        document.getElementById('user_input').value = '';
+
+        const response = await fetch('/interpreter/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': '99HayIrgknd2qAImuPZx9H7oFHGmxJzhItOSczvNMpaLksXfli0urUKTX9fUCKbJ'
+            },
+            body: `code=${encodeURIComponent(editor.getValue())}&user_inputs=${encodeURIComponent(JSON.stringify(userInputs))}`
+        });
+
+        const data = await response.json();
+
+        if (data.status === "input_required") {
+            document.getElementById('prompt-text').textContent = data.prompt || "Ввод:";
+            document.getElementById('user_input').focus();
+        } else {
+            outputElement.textContent = data.output;
+            document.getElementById('input-section').style.display = 'none';
+        }
+        
+        // После отправки снова отключаем кнопку
+        document.getElementById('submit-button').disabled = true;
+    }
+
+    // Функция для очистки вывода (без изменений)
+    function clearOutput() {
+        document.getElementById('output').textContent = '';
+    }
+
+    // Назначаем обработчики событий
+    document.getElementById('run-button').addEventListener('click', runCode);
+    document.getElementById('check-button').addEventListener('click', checkCode);
+    document.getElementById('submit-button').addEventListener('click', submitInput);
+    document.getElementById('clear-button').addEventListener('click', clearOutput);
+
+    // Обработка ввода в поле user_input
+    document.getElementById('user_input').addEventListener('input', function() {
+        // Включаем/отключаем кнопку в зависимости от наличия текста
+        document.getElementById('submit-button').disabled = this.value.trim() === '';
+    });
+
+    // Обработка нажатия Enter в поле ввода (с предотвращением отправки формы)
+    document.getElementById('user_input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Предотвращаем стандартное поведение
+            if (!document.getElementById('submit-button').disabled) {
+                submitInput();
+            }
+        }
+    });
+</script>
+            </div>
+        </div>
+
+        <!-- Горизонтальная линия -->
+        <hr class="my-4">
+
+        <!-- Вопросы и ответы (только для аутентифицированных пользователей) -->
+        
+        
+            <!-- Сообщение для неаутентифицированных пользователей -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title h4 mb-3">Вопросы для закрепления</h2>
+                    <p class="card-text">Вопросы для проверки усвоенного материала доступны зарегистрированным пользователям.</p>
+                    <div class="d-flex gap-2">
+                        <a href="/accounts/login/" class="btn btn-primary">Войти</a>
+                        <a href="/accounts/register/" class="btn btn-outline-primary">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </div>
+        
+        
+
+        <!-- Кнопка "К следующему уроку" -->
+         
+            <div class="text-center mt-5">
+                <a href="/lesson/peremennye-i-tipy-dannyh/" class="btn btn-primary btn-lg">К следующему уроку</a>
+            </div>
+        
+    
+
+    <!-- Подключаем jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Подключаем Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script>
+        $(document).ready(function() {
+            // Обработка отправки формы
+            $('#quiz-form').on('submit', function(e) {
+                e.preventDefault(); // Отменяем стандартную отправку формы
+
+                // Отправляем данные формы через AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/lesson/vvedenie-v-python/',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Обновляем прогресс
+                        $('.progress-bar').css('width', response.progress + '%');
+                        $('.progress-bar').text(response.progress + '%');
+
+                        // Скрываем правильно отвеченные вопросы
+                        response.answered_questions.forEach(function(questionId) {
+                            $('#question-' + questionId).remove();
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Произошла ошибка при отправке ответов.');
+                    }
+                });
+            });
+
+            // Функция для добавления кнопки "Скопировать" к блоку <pre><code>
+            function addCopyButtonToCodeBlocks() {
+                $('pre code').each(function() {
+                    const $code = $(this);
+                    const $pre = $code.closest('pre'); // Находим родительский <pre>
+                    if (!$pre.closest('.code-container').length) { // Проверяем, чтобы не дублировать кнопки
+                        const codeText = $code.text(); // Получаем текст из <code>
+
+                        // Создаем контейнер для кнопки и добавляем её перед <pre>
+                        const $container = $('<div>').addClass('code-container mb-3');
+                        const $buttonContainer = $('<div>').addClass('d-flex justify-content-between align-items-center bg-light p-2 rounded-top');
+                        const $copyButton = $('<button>')
+                            .addClass('btn btn-sm btn-outline-secondary copy-button')
+                            .attr('data-code', codeText)
+                            .html('<i class="bi bi-clipboard"></i>');
+                        $buttonContainer.append('<span class="text-muted">Скопировать</span>').append($copyButton);
+                        $container.append($buttonContainer).append($pre.clone()); // Клонируем <pre> и добавляем его в контейнер
+
+                        // Заменяем <pre> на новый контейнер
+                        $pre.replaceWith($container);
+                    }
+                });
+            }
+
+            // Используем MutationObserver для отслеживания изменений в DOM
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'childList') {
+                        addCopyButtonToCodeBlocks(); // Добавляем кнопки для новых <pre><code>
+                    }
+                });
+            });
+
+            // Начинаем наблюдение за изменениями в DOM
+            observer.observe(document.body, { childList: true, subtree: true });
+
+            // Обработка кнопки "Скопировать" (альтернативный метод)
+            $(document).on('click', '.copy-button', function() {
+                const $button = $(this);
+                const code = $button.data('code'); // Получаем текст из data-атрибута
+
+                // Создаем временный textarea для копирования
+                const $tempTextarea = $('<textarea>');
+                $tempTextarea.val(code).css({ position: 'absolute', left: '-9999px' }).appendTo('body');
+                $tempTextarea.select();
+
+                try {
+                    // Пытаемся скопировать текст
+                    document.execCommand('copy');
+
+                    // Меняем иконку на текст "Скопировано"
+                    $button.html('Скопировано').prop('disabled', true);
+
+                    // Возвращаем иконку через 2 секунды
+                    setTimeout(function() {
+                        $button.html('<i class="bi bi-clipboard"></i>').prop('disabled', false);
+                    }, 2000);
+                } catch (err) {
+                    alert('Не удалось скопировать код.');
+                } finally {
+                    // Удаляем временный textarea
+                    $tempTextarea.remove();
+                }
+            });
+
+            // Инициализация кнопок для уже загруженных <pre><code>
+            addCopyButtonToCodeBlocks();
+        });
+    </script>
+
+    </main>
+
+    <footer>
+      ﻿<footer class="border-top text-center py-3">
+  <p>© 2026 Copyright</p>    
+</footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+
 </body>
 </html>
