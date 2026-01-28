@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Словари - Python Lessons</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #3776ab;
+            --secondary-color: #ffd700;
+            --dark-bg: #0f1419;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+        
+        /* Заголовок и навигация */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8c 100%);
+            color: var(--text-light);
+            padding: 0;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 10px;
+            margin-left: 8px;
+            position: static;
+            height: auto;
+            width: auto;
+            background: none;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--primary-color);
+            min-width: 280px;
+            box-shadow: var(--card-shadow);
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            font-weight: 400;
+            font-size: 14px;
+        }
+        
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--secondary-color);
+            padding-left: 25px;
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+        
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 3px;
+        }
+        
+        /* Основная часть */
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 42px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .content {
+            background: var(--text-light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            line-height: 1.8;
+        }
+        
+        .content h2 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 15px;
+        }
+        
+        .content h3 {
+            color: var(--primary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .content h4 {
+            color: var(--primary-color);
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .content ul {
+            margin: 15px 0 15px 30px;
+            list-style-type: disc;
+        }
+        
+        .content li {
+            margin-bottom: 8px;
+        }
+        
+        .content li strong {
+            color: var(--primary-color);
+        }
+        
+        .content ol {
+            margin: 15px 0 15px 30px;
+            list-style-type: decimal;
+        }
+        
+        .content ol li {
+            margin-bottom: 12px;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        
+        .code-block code {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .note {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .note strong {
+            color: var(--primary-color);
+        }
+        
+        .mission {
+            background-color: #fff3e0;
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .mission h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+        
+        .mission ul {
+            margin-left: 20px;
+        }
+        
+        .diagram {
+            background-color: #f9f9f9;
+            border: 2px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #f5f5f5;
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 12px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table tr:hover {
+            background-color: #e8e8e8;
+        }
+        
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+        
+        /* Адаптивный дизайн */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 10px;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background-color: var(--primary-color);
+                padding: 20px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .dropdown-menu {
+                display: none;
+                position: static;
+                background-color: rgba(45, 90, 140, 0.95);
+                box-shadow: none;
+                margin-top: 0;
+                border-radius: 0;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .dropdown-menu a {
+                padding: 12px 0 12px 30px;
+                font-size: 13px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .dropdown-menu a:hover {
+                padding-left: 35px;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .page-title h1 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .comparison-table {
+                font-size: 13px;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span>PyLearn</span>
+            </a>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="intro.html">Введение</a>
+                <div class="dropdown">
+                    <a href="index.html#lessons">Уроки</a>
+                    <div class="dropdown-menu">
+                        <a href="intro.html">📚 Введение в Python</a>
+                        <a href="lesson1.html">1. Переменные и типы данных</a>
+                        <a href="lesson2.html">2. Условные операторы</a>
+                        <a href="lesson3.html">3. Циклы</a>
+                        <a href="lesson4.html">4. Функции</a>
+                        <a href="lesson5.html">5. Списки и кортежи</a>
+                        <a href="lesson6.html">6. Словари</a>
+                        <a href="lesson7.html">7. Множества</a>
+                        <a href="lesson8.html">8. Работа с файлами</a>
+                        <a href="lesson9.html">9. Обработка исключений</a>
+                        <a href="lesson10.html">10. Модули и пакеты</a>
+                        <a href="lesson11.html">11. Классы и объекты</a>
+                        <a href="lesson12.html">12. Наследование и полиморфизм</a>
+                        <a href="lesson13.html">13. Работа с библиотеками</a>
+                        <a href="lesson14.html">14. Итоговый проект</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h1>Словари</h1>
+            <p>Работа со словарями в Python</p>
+        </div>
+
+        <div class="content">
+            <h2>Введение</h2>
+            <p>В этом занятии мы изучим, как работать со словарями в Python. Словари — это неупорядоченные коллекции пар "ключ-значение". Они полезны для хранения и быстрого доступа к данным по уникальным ключам.</p>
+
+            <h2>Создание словаря</h2>
+            <p>Словари создаются с помощью фигурных скобок <strong>{}</strong> или функции <strong>dict()</strong>.</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+print(person["name"])
+# Выведет: Иван
+
+print(person["age"])
+# Выведет: 15</code></pre></div>
+
+            <h2>Доступ к элементам</h2>
+            <p>Доступ к значениям словаря осуществляется по ключам:</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+print(person["name"])
+# Выведет: Иван
+
+print(person["city"])
+# Выведет: Москва</code></pre></div>
+
+            <h3>Использование метода get()</h3>
+            <p>Метод <strong>get()</strong> позволяет получить значение по ключу, но если ключ не существует, вернёт значение по умолчанию (обычно <strong>None</strong>):</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15}
+
+print(person.get("name"))
+# Выведет: Иван
+
+print(person.get("email"))
+# Выведет: None
+
+print(person.get("email", "Email не указан"))
+# Выведет: Email не указан</code></pre></div>
+
+            <h2>Основные операции со словарями</h2>
+
+            <h3>Добавление и изменение элементов</h3>
+            <p>Вы можете добавлять новые элементы или изменять существующие:</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15}
+
+person["age"] = 16
+# Изменяем значение существующего ключа
+
+person["email"] = "ivan@example.com"
+# Добавляем новый элемент
+
+print(person)
+# Выведет: {'name': 'Иван', 'age': 16, 'email': 'ivan@example.com'}</code></pre></div>
+
+            <h3>Удаление элементов</h3>
+            <p>Существует несколько способов удалить элемент из словаря:</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва", "email": "ivan@example.com"}
+
+del person["city"]
+# Удаляем элемент по ключу
+
+removed_age = person.pop("age")
+# Удаляем элемент с возвращением значения
+
+print(removed_age)
+# Выведет: 15
+
+print(person)
+# Выведет: {'name': 'Иван', 'email': 'ivan@example.com'}</code></pre></div>
+
+            <h3>Проверка наличия ключа</h3>
+            <p>Используйте оператор <strong>in</strong> для проверки наличия ключа:</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15}
+
+if "name" in person:
+    print("Ключ 'name' существует")
+
+if "email" in person:
+    print("Ключ 'email' существует")
+else:
+    print("Ключа 'email' не существует")</code></pre></div>
+
+            <h3>Получение всех ключей, значений и элементов</h3>
+            <p>Методы для получения информации из словаря:</p>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+keys = person.keys()
+# Получение всех ключей
+print(keys)
+# Выведет: dict_keys(['name', 'age', 'city'])
+
+values = person.values()
+# Получение всех значений
+print(values)
+# Выведет: dict_values(['Иван', 15, 'Москва'])
+
+items = person.items()
+# Получение всех пар "ключ-значение"
+print(items)
+# Выведет: dict_items([('name', 'Иван'), ('age', 15), ('city', 'Москва')])</code></pre></div>
+
+            <h2>Циклы и словари</h2>
+            <p>Словари можно перебирать с помощью циклов. Есть несколько способов итерирования:</p>
+
+            <h3>Перебор по ключам</h3>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+for key in person:
+    print(key)
+# Выведет:
+# name
+# age
+# city</code></pre></div>
+
+            <h3>Перебор по значениям</h3>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+for value in person.values():
+    print(value)
+# Выведет:
+# Иван
+# 15
+# Москва</code></pre></div>
+
+            <h3>Перебор по парам ключ-значение</h3>
+            <div class="code-block"><pre><code>person = {"name": "Иван", "age": 15, "city": "Москва"}
+
+for key, value in person.items():
+    print(f"{key}: {value}")
+# Выведет:
+# name: Иван
+# age: 15
+# city: Москва</code></pre></div>
+
+            <h2>Вложенные словари</h2>
+            <p>Словари могут содержать другие словари в качестве значений:</p>
+            <div class="code-block"><pre><code>students = {
+    "ivan": {"age": 15, "grade": 4},
+    "masha": {"age": 16, "grade": 5},
+    "petr": {"age": 15, "grade": 3}
+}
+
+print(students["ivan"]["age"])
+# Выведет: 15
+
+print(students["masha"]["grade"])
+# Выведет: 5</code></pre></div>
+
+            <h2>Практические примеры</h2>
+
+            <h3>Пример 1: Каталог товаров</h3>
+            <div class="code-block"><pre><code>catalog = {
+    "яблоки": 50,
+    "бананы": 30,
+    "апельсины": 40
+}
+
+for product, price in catalog.items():
+    print(f"{product}: {price} рублей")</code></pre></div>
+
+            <p><strong>Вывод:</strong></p>
+            <div class="code-block"><pre><code>яблоки: 50 рублей
+бананы: 30 рублей
+апельсины: 40 рублей</code></pre></div>
+
+            <h3>Пример 2: Подсчёт частоты слов</h3>
+            <div class="code-block"><pre><code>text = "hello world hello python hello"
+
+words = text.split()
+word_count = {}
+
+for word in words:
+    if word in word_count:
+        word_count[word] += 1
+    else:
+        word_count[word] = 1
+
+print(word_count)
+# Выведет: {'hello': 3, 'world': 1, 'python': 1}</code></pre></div>
+
+            <h3>Пример 3: Информация об ученике</h3>
+            <div class="code-block"><pre><code>student = {
+    "name": "Гермиона",
+    "age": 17,
+    "subjects": ["Математика", "Литература", "История"],
+    "grades": {"Математика": 5, "Литература": 5, "История": 4}
+}
+
+print(f"Студент: {student['name']}")
+print(f"Возраст: {student['age']}")
+
+avg_grade = sum(student["grades"].values()) / len(student["grades"])
+print(f"Средний балл: {avg_grade}")</code></pre></div>
+
+            <p><strong>Вывод:</strong></p>
+            <div class="code-block"><pre><code>Студент: Гермиона
+Возраст: 17
+Средний балл: 4.67</code></pre></div>
+
+            <h2>Заключение</h2>
+            <p>Теперь вы знаете, как работать со словарями в Python. Словари — это мощный инструмент для хранения и организации данных. Попробуйте создать свой словарь и выполнить с ним различные операции. В следующем занятии мы изучим множества.</p>
+
+            <h2>Практика</h2>
+            <div class="mission">
+                <h3>🎯 Миссия 7: Вести учёт студентов</h3>
+                <p><strong>🔍 Контекст:</strong> Даже Дамблдору нужна система учёта!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Создайте словарь <code>student</code> с ключами:
+                        <ul>
+                            <li>"name", "age"</li>
+                            <li>"subjects" (список)</li>
+                            <li>"grades" (словарь оценок)</li>
+                        </ul>
+                    </li>
+                    <li>Напишите функцию <code>update_student()</code></li>
+                    <li>Функция <code>print_student()</code> должна считать средний балл</li>
+                </ol>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Студент: Гермиона
+Возраст: 17
+Средний балл: 5.0</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>sum(grades.values()) / len(grades)</code></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>&copy; 2026 Python Lessons</strong> - Полный курс программирования на Python</p>
+        <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="intro.html">Введение</a>
+            <a href="#">О курсе</a>
+            <a href="#">Контакты</a>
+        </div>
+        <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">Создано с <i class="fas fa-heart" style="color: #ff6b6b;"></i> для любителей программирования</p>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownToggle = dropdown.querySelector('a');
+        
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Управление выпадающим меню на мобильных устройствах
+        dropdownToggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
+        });
+        
+        // Закрытие меню при клике на ссылку в выпадающем списке
+        document.querySelectorAll('.dropdown-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                dropdown.classList.remove('active');
+            });
+        });
+        
+        // Закрытие навигации при клике на остальные ссылки
+        document.querySelectorAll('nav > a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                dropdown.classList.remove('active');
+            });
+        });
+        
+        // Закрытие меню при клике вне его
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

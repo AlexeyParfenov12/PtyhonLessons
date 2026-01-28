@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Введение в Python - Python Lessons</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #3776ab;
+            --secondary-color: #ffd700;
+            --dark-bg: #0f1419;
+            --light-bg: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+        }
+        
+        /* Заголовок и навигация */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8c 100%);
+            color: var(--text-light);
+            padding: 0;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-light);
+        }
+        
+        nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--secondary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown > a::after {
+            content: '▼';
+            font-size: 10px;
+            margin-left: 8px;
+            position: static;
+            height: auto;
+            width: auto;
+            background: none;
+        }
+        
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--primary-color);
+            min-width: 280px;
+            box-shadow: var(--card-shadow);
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            font-weight: 400;
+            font-size: 14px;
+        }
+        
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-menu a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: var(--secondary-color);
+            padding-left: 25px;
+        }
+        
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+        
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            border-radius: 3px;
+        }
+        
+        /* Основная часть */
+        main {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 42px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .page-title p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .content {
+            background: var(--text-light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            line-height: 1.8;
+        }
+        
+        .content h2 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 15px;
+        }
+        
+        .content h3 {
+            color: var(--primary-color);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .content ul {
+            margin: 15px 0 15px 30px;
+            list-style-type: disc;
+        }
+        
+        .content li {
+            margin-bottom: 8px;
+        }
+        
+        .content li strong {
+            color: var(--primary-color);
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        
+        .code-block code {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .note {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .note strong {
+            color: var(--primary-color);
+        }
+        
+        .mission {
+            background-color: #fff3e0;
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .mission h3 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+        
+        .mission ul {
+            margin-left: 20px;
+        }
+        
+        /* Подвал */
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+        
+        /* Адаптивный дизайн */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 10px;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                gap: 0;
+                background-color: var(--primary-color);
+                padding: 20px;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                padding: 12px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .dropdown-menu {
+                display: none;
+                position: static;
+                background-color: rgba(45, 90, 140, 0.95);
+                box-shadow: none;
+                margin-top: 0;
+                border-radius: 0;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .dropdown-menu a {
+                padding: 12px 0 12px 30px;
+                font-size: 13px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            .dropdown-menu a:hover {
+                padding-left: 35px;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .page-title h1 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span>PyLearn</span>
+            </a>
+            <nav>
+                <a href="index.html">Главная</a>
+                <a href="intro.html">Введение</a>
+                <div class="dropdown">
+                    <a href="#lessons">Уроки</a>
+                    <div class="dropdown-menu">
+                        <a href="lesson1.html">1. Переменные и типы данных</a>
+                        <a href="lesson2.html">2. Условные операторы</a>
+                        <a href="lesson3.html">3. Циклы</a>
+                        <a href="lesson4.html">4. Функции</a>
+                        <a href="lesson5.html">5. Списки и кортежи</a>
+                        <a href="lesson6.html">6. Словари</a>
+                        <a href="lesson7.html">7. Множества</a>
+                        <a href="lesson8.html">8. Работа с файлами</a>
+                        <a href="lesson9.html">9. Обработка исключений</a>
+                        <a href="lesson10.html">10. Модули и пакеты</a>
+                        <a href="lesson11.html">11. Классы и объекты</a>
+                        <a href="lesson12.html">12. Наследование и полиморфизм</a>
+                        <a href="lesson13.html">13. Работа с библиотеками</a>
+                        <a href="lesson14.html">14. Итоговый проект</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-title">
+            <h1>Введение в Python</h1>
+            <p>Знакомство с языком Python, установка и настройка среды разработки</p>
+        </div>
+
+        <div class="content">
+            <h2>Что такое Python?</h2>
+            <p>Python — это интерпретируемый язык программирования высокого уровня. Это означает, что код на Python выполняется построчно, без необходимости компиляции. Python был создан Гвидо ван Россумом в 1991 году и с тех пор стал одним из самых популярных языков в мире.</p>
+
+            <p>Python — это современный, мощный и простой в изучении язык программирования. Он широко используется в различных областях: от веб-разработки до анализа данных и искусственного интеллекта. В этом занятии мы познакомимся с основами Python, научимся писать простые программы и разберем, как работает интерпретатор.</p>
+
+            <h3>Основные особенности Python:</h3>
+            <ul>
+                <li><strong>Простота синтаксиса:</strong> Python легко читать и писать, даже для новичков.</li>
+                <li><strong>Кроссплатформенность:</strong> Python работает на Windows, macOS, Linux и других операционных системах.</li>
+                <li><strong>Большое количество библиотек:</strong> Python имеет богатую стандартную библиотеку и множество сторонних модулей для решения различных задач.</li>
+            </ul>
+
+            <h2>Установка Python</h2>
+            <p>Для начала работы с Python необходимо установить интерпретатор. Скачать его можно с официального сайта python.org. Ниже приведены подробные инструкции по установке Python на различные операционные системы, а также инструкции по открытию командной строки и запуску интерпретатора.</p>
+
+            <h3>Как открыть командную строку</h3>
+            <p>Перед установкой Python важно знать, как открыть командную строку (терминал) в вашей операционной системе. Это понадобится для проверки установки и запуска Python.</p>
+
+            <ul>
+                <li><strong>Windows:</strong>
+                    <ul>
+                        <li>Нажмите Win + R, введите cmd и нажмите Enter.</li>
+                        <li>Или найдите "Командная строка" через поиск в меню "Пуск".</li>
+                    </ul>
+                </li>
+                <li><strong>macOS:</strong>
+                    <ul>
+                        <li>Откройте "Терминал" через поиск Spotlight (нажмите Cmd + Пробел и введите "Терминал").</li>
+                        <li>Или найдите "Терминал" в папке "Утилиты".</li>
+                    </ul>
+                </li>
+                <li><strong>Linux:</strong>
+                    <ul>
+                        <li>Нажмите Ctrl + Alt + T для открытия терминала.</li>
+                        <li>Или найдите "Терминал" в меню приложений.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Установка Python на Windows</h3>
+            <ol>
+                <li>Перейдите на официальный сайт Python: python.org/downloads/windows/.</li>
+                <li>Выберите версию Python, которую хотите установить (рекомендуется использовать последнюю стабильную версию).</li>
+                <li>Скачайте установщик (выберите между 32-битной и 64-битной версией в зависимости от вашей системы).</li>
+                <li>Запустите скачанный установщик.</li>
+                <li>На первом экране установщика убедитесь, что выбрана опция "Add Python to PATH". Это позволит запускать Python из командной строки.</li>
+                <li>Нажмите "Install Now" для начала установки.</li>
+                <li>После завершения установки откройте командную строку (см. выше) и введите <code>python --version</code>, чтобы убедиться, что Python установлен корректно.</li>
+            </ol>
+
+            <h3>Установка Python на macOS</h3>
+            <ol>
+                <li>Перейдите на официальный сайт Python: python.org/downloads/macos/.</li>
+                <li>Скачайте последнюю версию Python для macOS.</li>
+                <li>Откройте скачанный файл .pkg и следуйте инструкциям установщика.</li>
+                <li>После завершения установки откройте терминал (см. выше) и введите <code>python3 --version</code>, чтобы проверить установку.</li>
+            </ol>
+
+            <h3>Установка Python на Linux</h3>
+            <p>Большинство дистрибутивов Linux поставляются с предустановленным Python. Однако, если вам нужно установить другую версию, выполните следующие шаги:</p>
+            <ol>
+                <li>Откройте терминал (см. выше).</li>
+                <li>Для установки Python на Ubuntu или Debian-based системах выполните команду:</li>
+            </ol>
+            <div class="code-block"><pre><code>sudo apt update
+sudo apt install python3</code></pre></div>
+            <ol start="3">
+                <li>Для установки на CentOS или Fedora выполните:</li>
+            </ol>
+            <div class="code-block"><pre><code>sudo yum install python3</code></pre></div>
+            <ol start="4">
+                <li>После установки проверьте версию Python с помощью команды <code>python3 --version</code>.</li>
+            </ol>
+
+            <h3>Как открыть интерпретатор Python</h3>
+            <p>После установки Python вы можете запустить его интерпретатор для выполнения команд. Вот как это сделать:</p>
+            <ul>
+                <li><strong>Windows:</strong>
+                    <ul>
+                        <li>Откройте командную строку (см. выше).</li>
+                        <li>Введите <code>python</code> и нажмите Enter. Если Python добавлен в PATH, откроется интерпретатор.</li>
+                    </ul>
+                </li>
+                <li><strong>macOS и Linux:</strong>
+                    <ul>
+                        <li>Откройте терминал (см. выше).</li>
+                        <li>Введите <code>python3</code> и нажмите Enter. Откроется интерпретатор Python.</li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="note"><strong>Совет:</strong> Для выхода из интерпретатора введите команду <code>exit()</code> или нажмите Ctrl + D.</div>
+
+            <h2>Первая программа на Python</h2>
+            <p>Давайте напишем нашу первую программу на Python. Традиционно первой программой является вывод текста "Hello, World!" на экран. В Python это делается с помощью функции print().</p>
+            <div class="code-block"><pre><code>print("Hello, World!")</code></pre></div>
+            <p>Эта программа выведет на экран текст <strong>Hello, World!</strong>. Функция <code>print()</code> используется для вывода информации на экран.</p>
+
+            <h3>Вывод данных с помощью print</h3>
+            <p>Функция print() может выводить несколько значений, разделенных запятыми. По умолчанию они разделяются пробелом:</p>
+            <div class="code-block"><pre><code>print("Имя:", "Иван", "Возраст:", 15)</code></pre></div>
+            <p><strong>Вывод:</strong> Имя: Иван Возраст: 15</p>
+
+            <p>Можно использовать символ + для объединения строк:</p>
+            <div class="code-block"><pre><code>print("Имя: " + "Иван" + ", Возраст: " + str(15))</code></pre></div>
+            <p><strong>Вывод:</strong> Имя: Иван, Возраст: 15</p>
+
+            <p>Символ \n используется для перевода строки:</p>
+            <div class="code-block"><pre><code>print("Первая строка\nВторая строка")</code></pre></div>
+            <p><strong>Вывод:</strong></p>
+            <div class="code-block"><pre><code>Первая строка
+Вторая строка</code></pre></div>
+
+            <p>Параметр end позволяет изменить символ, который добавляется в конце вывода (по умолчанию это \n):</p>
+            <div class="code-block"><pre><code>print("Привет, ", end="")
+print("мир!")</code></pre></div>
+            <p><strong>Вывод:</strong> Привет, мир!</p>
+
+            <h3>Форматированные строки (f-строки)</h3>
+            <p>В Python 3.6 и выше появилась удобная возможность для форматирования строк — f-строки. Они позволяют встраивать выражения внутри строки, используя фигурные скобки {}. Это делает код более читаемым и компактным.</p>
+
+            <p>Пример использования f-строки:</p>
+            <div class="code-block"><pre><code>name = "Иван"
+age = 15
+print(f"Имя: {name}, Возраст: {age}")</code></pre></div>
+            <p><strong>Вывод:</strong> Имя: Иван, Возраст: 15</p>
+
+            <p>Внутри фигурных скобок можно использовать не только переменные, но и выражения:</p>
+            <div class="code-block"><pre><code>a = 5
+b = 10
+print(f"Сумма чисел {a} и {b} равна {a + b}")</code></pre></div>
+            <p><strong>Вывод:</strong> Сумма чисел 5 и 10 равна 15</p>
+
+            <p>F-строки также поддерживают форматирование чисел, дат и других типов данных. Например, можно указать количество знаков после запятой для дробных чисел:</p>
+            <div class="code-block"><pre><code>pi = 3.14159
+print(f"Число Пи с точностью до двух знаков: {pi:.2f}")</code></pre></div>
+            <p><strong>Вывод:</strong> Число Пи с точностью до двух знаков: 3.14</p>
+
+            <div class="note"><strong>Совет:</strong> F-строки — это мощный инструмент, который упрощает работу со строками и делает код более понятным.</div>
+
+            <h2>Переменные и типы данных</h2>
+            <p>В Python переменные используются для хранения данных. Например, мы можем создать переменную name и присвоить ей значение:</p>
+            <div class="code-block"><pre><code>name = "Иван"</code></pre></div>
+            <p>Здесь name — это переменная, а "Иван" — строка, которая хранится в этой переменной. Python автоматически определяет тип данных, поэтому нам не нужно явно указывать, что name — это строка.</p>
+
+            <h3>Основные типы данных в Python:</h3>
+            <ul>
+                <li><strong>Числа:</strong> целые (int) и дробные (float).</li>
+                <li><strong>Строки:</strong> последовательности символов, заключенные в кавычки (str).</li>
+                <li><strong>Списки:</strong> упорядоченные коллекции элементов (list).</li>
+                <li><strong>Словари:</strong> пары ключ-значение (dict).</li>
+            </ul>
+
+            <h3>Пример программы</h3>
+            <p>Давайте напишем программу, которая запрашивает у пользователя его имя и выводит приветствие:</p>
+            <div class="code-block"><pre><code>name = input("Введите ваше имя: ")
+print(f"Привет, {name}!")</code></pre></div>
+            <p>Эта программа использует функцию <code>input()</code> для ввода данных с клавиатуры и выводит приветствие с использованием форматированной строки.</p>
+
+            <h2>Заключение</h2>
+            <p>Теперь вы знаете основы Python и можете написать свою первую программу. В следующих занятиях мы углубимся в изучение языка и научимся решать более сложные задачи.</p>
+
+            <h2>Практика</h2>
+            <div class="mission">
+                <h3>🎯 Миссия 1: Создать первый контакт с пользователем</h3>
+                <p><strong>🔍 Контекст:</strong> Даже R2-D2 пищал при знакомстве. Будьте вежливее дроида!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ul>
+                    <li>Используйте input() трижды</li>
+                    <li>Рассчитайте год рождения: 2025 - возраст</li>
+                    <li>Выведите приветствие через f-строку</li>
+                </ul>
+                
+                <p><strong>Используйте name, age и color как имена переменных.</strong></p>
+                
+                <p><strong>Пример входных данных:</strong></p>
+                <div class="code-block"><pre><code>Введите имя: Валли
+Введите возраст: 700
+Введите цвет: жёлтый</code></pre></div>
+                
+                <p><strong>Ожидаемый вывод:</strong></p>
+                <div class="code-block"><pre><code>Привет, Валли!
+Год рождения: 1325
+Жёлтый - тёплый выбор!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>int(input())</code> преобразует текст в число</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>&copy; 2026 Python Lessons</strong> - Полный курс программирования на Python</p>
+        <div class="footer-links">
+            <a href="index.html">Главная</a>
+            <a href="intro.html">Введение</a>
+            <a href="#">О курсе</a>
+            <a href="#">Контакты</a>
+        </div>
+        <p style="margin-top: 15px; font-size: 12px; opacity: 0.8;">Создано с <i class="fas fa-heart" style="color: #ff6b6b;"></i> для любителей программирования</p>
+    </footer>
+
+    <script>
+        // Мобильное меню
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+        const dropdown = document.querySelector('.dropdown');
+        
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                if (dropdown) dropdown.classList.remove('active');
+            });
+        });
+        
+        // Для мобильного меню - управление выпадающим меню уроков
+        if (window.innerWidth <= 768 && dropdown) {
+            const dropdownToggle = dropdown.querySelector('a');
+            dropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
