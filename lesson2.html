@@ -1,533 +1,557 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Условные операторы - Python Lessons</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #3776ab;
-            --secondary-color: #ffd700;
-            --dark-bg: #0f1419;
-            --light-bg: #f8f9fa;
-            --text-dark: #2c3e50;
-            --text-light: #ffffff;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--light-bg);
-        }
-        
-        /* Заголовок и навигация */
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8c 100%);
-            color: var(--text-light);
-            padding: 0;
-            box-shadow: var(--card-shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #3776ab;
+        --secondary-color: #e07800;
+        --dark-bg: #0f1419;
+        --light-bg: #f8f9fa;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--light-bg);
+      }
+
+      /* Заголовок и навигация */
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          #2d5a8c 100%
+        );
+        color: var(--text-light);
+        padding: 0;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--text-light);
+      }
+
+      nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: var(--secondary-color);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--secondary-color);
+        transition: var(--transition);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown > a::after {
+        content: "▼";
+        font-size: 10px;
+        margin-left: 8px;
+        position: static;
+        height: auto;
+        width: auto;
+        background: none;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--primary-color);
+        min-width: 280px;
+        box-shadow: var(--card-shadow);
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+        z-index: 1001;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 12px 20px;
+        color: var(--text-light);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+        font-weight: 400;
+        font-size: 14px;
+      }
+
+      .dropdown-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .dropdown-menu a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: var(--secondary-color);
+        padding-left: 25px;
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 6px;
+      }
+
+      .nav-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-light);
+        border-radius: 3px;
+      }
+
+      /* Основная часть */
+      main {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .page-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .page-title h1 {
+        font-size: 42px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .page-title p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .content {
+        background: var(--text-light);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+        line-height: 1.8;
+      }
+
+      .content h2 {
+        color: var(--primary-color);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 24px;
+        border-left: 4px solid var(--secondary-color);
+        padding-left: 15px;
+      }
+
+      .content h3 {
+        color: var(--primary-color);
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .content h4 {
+        color: var(--primary-color);
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-size: 16px;
+      }
+
+      .content p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      .content ul {
+        margin: 15px 0 15px 30px;
+        list-style-type: disc;
+      }
+
+      .content li {
+        margin-bottom: 8px;
+      }
+
+      .content li strong {
+        color: var(--primary-color);
+      }
+
+      .content ol {
+        margin: 15px 0 15px 30px;
+        list-style-type: decimal;
+      }
+
+      .content ol li {
+        margin-bottom: 12px;
+      }
+
+      .code-block {
+        background-color: #f5f5f5;
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        line-height: 1.4;
+      }
+
+      .code-block code {
+        color: #333;
+        font-size: 14px;
+      }
+
+      .note {
+        background-color: #e3f2fd;
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+      }
+
+      .note strong {
+        color: var(--primary-color);
+      }
+
+      .mission {
+        background-color: #fff3e0;
+        border-left: 4px solid var(--secondary-color);
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 5px;
+      }
+
+      .mission h3 {
+        color: var(--secondary-color);
+        margin-top: 0;
+      }
+
+      .mission ul {
+        margin-left: 20px;
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: #f9f9f9;
+      }
+
+      .comparison-table th {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        padding: 12px;
+        text-align: left;
+      }
+
+      .comparison-table td {
+        border-bottom: 1px solid #ddd;
+        padding: 12px;
+      }
+
+      .comparison-table tr:hover {
+        background-color: #f0f0f0;
+      }
+
+      /* Подвал */
+      footer {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
+        color: var(--text-light);
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 60px;
+        border-top: 3px solid var(--primary-color);
+      }
+
+      footer p {
+        margin-bottom: 10px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+      }
+
+      .footer-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--text-light);
+      }
+
+      /* Адаптивный дизайн */
+      @media (max-width: 768px) {
         .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+          padding: 15px 10px;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-            color: var(--text-light);
-        }
-        
+
         nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          gap: 0;
+          background-color: var(--primary-color);
+          padding: 20px;
         }
-        
+
+        nav.active {
+          display: flex;
+        }
+
         nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: var(--transition);
-            position: relative;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        nav a:hover {
-            background-color: rgba(255, 215, 0, 0.2);
-            color: var(--secondary-color);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown > a::after {
-            content: '▼';
-            font-size: 10px;
-            margin-left: 8px;
-            position: static;
-            height: auto;
-            width: auto;
-            background: none;
-        }
-        
+
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--primary-color);
-            min-width: 280px;
-            box-shadow: var(--card-shadow);
-            border-radius: 5px;
-            margin-top: 10px;
-            overflow: hidden;
-            z-index: 1001;
+          display: none;
+          position: static;
+          background-color: rgba(45, 90, 140, 0.95);
+          box-shadow: none;
+          margin-top: 0;
+          border-radius: 0;
         }
-        
+
         .dropdown:hover .dropdown-menu {
-            display: block;
+          display: none;
         }
-        
+
+        .dropdown.active .dropdown-menu {
+          display: block;
+        }
+
         .dropdown-menu a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-light);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            font-weight: 400;
-            font-size: 14px;
+          padding: 12px 0 12px 30px;
+          font-size: 13px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        .dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
+
         .dropdown-menu a:hover {
-            background-color: rgba(255, 215, 0, 0.2);
-            color: var(--secondary-color);
-            padding-left: 25px;
+          padding-left: 35px;
         }
-        
+
         .nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 6px;
+          display: flex;
         }
-        
-        .nav-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-light);
-            border-radius: 3px;
-        }
-        
-        /* Основная часть */
-        main {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .page-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
+
         .page-title h1 {
-            font-size: 42px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+          font-size: 28px;
         }
-        
-        .page-title p {
-            font-size: 18px;
-            color: #666;
-        }
-        
+
         .content {
-            background: var(--text-light);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: var(--card-shadow);
-            line-height: 1.8;
+          padding: 20px;
         }
-        
-        .content h2 {
-            color: var(--primary-color);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 24px;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 15px;
-        }
-        
-        .content h3 {
-            color: var(--primary-color);
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        
-        .content h4 {
-            color: var(--primary-color);
-            margin-top: 15px;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-        
-        .content p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        
-        .content ul {
-            margin: 15px 0 15px 30px;
-            list-style-type: disc;
-        }
-        
-        .content li {
-            margin-bottom: 8px;
-        }
-        
-        .content li strong {
-            color: var(--primary-color);
-        }
-        
-        .content ol {
-            margin: 15px 0 15px 30px;
-            list-style-type: decimal;
-        }
-        
-        .content ol li {
-            margin-bottom: 12px;
-        }
-        
-        .code-block {
-            background-color: #f5f5f5;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            line-height: 1.4;
-        }
-        
-        .code-block code {
-            color: #333;
-            font-size: 14px;
-        }
-        
-        .note {
-            background-color: #e3f2fd;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        
-        .note strong {
-            color: var(--primary-color);
-        }
-        
-        .mission {
-            background-color: #fff3e0;
-            border-left: 4px solid var(--secondary-color);
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 5px;
-        }
-        
-        .mission h3 {
-            color: var(--secondary-color);
-            margin-top: 0;
-        }
-        
-        .mission ul {
-            margin-left: 20px;
-        }
-        
+
         .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #f9f9f9;
+          font-size: 13px;
         }
-        
-        .comparison-table th {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 12px;
-            text-align: left;
-        }
-        
+
+        .comparison-table th,
         .comparison-table td {
-            border-bottom: 1px solid #ddd;
-            padding: 12px;
+          padding: 8px;
         }
-        
-        .comparison-table tr:hover {
-            background-color: #f0f0f0;
-        }
-        
-        /* Подвал */
-        footer {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
-            color: var(--text-light);
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 60px;
-            border-top: 3px solid var(--primary-color);
-        }
-        
-        footer p {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        
-        .footer-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--text-light);
-        }
-        
-        /* Адаптивный дизайн */
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 15px 10px;
-            }
-            
-            nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                gap: 0;
-                background-color: var(--primary-color);
-                padding: 20px;
-            }
-            
-            nav.active {
-                display: flex;
-            }
-            
-            nav a {
-                padding: 12px 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .dropdown-menu {
-                display: none;
-                position: static;
-                background-color: rgba(45, 90, 140, 0.95);
-                box-shadow: none;
-                margin-top: 0;
-                border-radius: 0;
-            }
-            
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
-            
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-            
-            .dropdown-menu a {
-                padding: 12px 0 12px 30px;
-                font-size: 13px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .dropdown-menu a:hover {
-                padding-left: 35px;
-            }
-            
-            .nav-toggle {
-                display: flex;
-            }
-            
-            .page-title h1 {
-                font-size: 28px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-            
-            .comparison-table {
-                font-size: 13px;
-            }
-            
-            .comparison-table th, .comparison-table td {
-                padding: 8px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <span>PyLearn</span>
-            </a>
-            <nav>
-                <a href="index.html">Главная</a>
-                <div class="dropdown">
-                    <a href="index.html#lessons">Уроки</a>
-                    <div class="dropdown-menu">
-                        <a href="intro.html">📚 Введение в Python</a>
-                        <a href="lesson1.html">1. Переменные и типы данных</a>
-                        <a href="lesson2.html">2. Условные операторы</a>
-                        <a href="lesson3.html">3. Циклы</a>
-                        <a href="lesson4.html">4. Функции</a>
-                        <a href="lesson5.html">5. Списки и кортежи</a>
-                        <a href="lesson6.html">6. Словари</a>
-                        <a href="lesson7.html">7. Множества</a>
-                        <a href="lesson8.html">8. Работа с файлами</a>
-                        <a href="lesson9.html">9. Обработка исключений</a>
-                        <a href="lesson10.html">10. Модули и пакеты</a>
-                        <a href="lesson11.html">11. Классы и объекты</a>
-                        <a href="lesson12.html">12. Наследование и полиморфизм</a>
-                        <a href="lesson13.html">13. Работа с библиотеками</a>
-                        <a href="lesson14.html">14. Итоговый проект</a>
-                    </div>
-                </div>
-            </nav>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <span>PyLearn</span>
+        </a>
+        <nav>
+          <a href="index.html">Главная</a>
+          <div class="dropdown">
+            <a href="index.html#lessons">Уроки</a>
+            <div class="dropdown-menu">
+              <a href="intro.html">📚 Введение в Python</a>
+              <a href="lesson1.html">1. Переменные и типы данных</a>
+              <a href="lesson2.html">2. Условные операторы</a>
+              <a href="lesson3.html">3. Циклы</a>
+              <a href="lesson4.html">4. Функции</a>
+              <a href="lesson5.html">5. Списки и кортежи</a>
+              <a href="lesson6.html">6. Словари</a>
+              <a href="lesson7.html">7. Множества</a>
+              <a href="lesson8.html">8. Работа с файлами</a>
+              <a href="lesson9.html">9. Обработка исключений</a>
+              <a href="lesson10.html">10. Модули и пакеты</a>
+              <a href="lesson11.html">11. Классы и объекты</a>
+              <a href="lesson12.html">12. Наследование и полиморфизм</a>
+              <a href="lesson13.html">13. Работа с библиотеками</a>
+              <a href="lesson14.html">14. Итоговый проект</a>
             </div>
+          </div>
+        </nav>
+        <div class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+      </div>
     </header>
 
     <main>
-        <div class="page-title">
-            <h1>Условные операторы</h1>
-            <p>Изучение операторов if, elif, else</p>
-        </div>
+      <div class="page-title">
+        <h1>Условные операторы</h1>
+        <p>Изучение операторов if, elif, else</p>
+      </div>
 
-        <div class="content">
-            <h2>Введение</h2>
-            <p>В этом занятии мы изучим, как использовать условные операторы в Python. Условные операторы позволяют выполнять различные действия в зависимости от условий.</p>
+      <div class="content">
+        <h2>Введение</h2>
+        <p>
+          В этом занятии мы изучим, как использовать условные операторы в
+          Python. Условные операторы позволяют выполнять различные действия в
+          зависимости от условий.
+        </p>
 
-            <h2>Операторы сравнения</h2>
-            <p>Перед изучением условных операторов важно разобрать операторы сравнения:</p>
-            
-            <table class="comparison-table">
-                <tr>
-                    <th>Оператор</th>
-                    <th>Описание</th>
-                    <th>Пример</th>
-                </tr>
-                <tr>
-                    <td>==</td>
-                    <td>Равно</td>
-                    <td>a == b</td>
-                </tr>
-                <tr>
-                    <td>!=</td>
-                    <td>Не равно</td>
-                    <td>a != b</td>
-                </tr>
-                <tr>
-                    <td>&lt;</td>
-                    <td>Меньше</td>
-                    <td>a &lt; b</td>
-                </tr>
-                <tr>
-                    <td>&gt;</td>
-                    <td>Больше</td>
-                    <td>a &gt; b</td>
-                </tr>
-                <tr>
-                    <td>&lt;=</td>
-                    <td>Меньше или равно</td>
-                    <td>a &lt;= b</td>
-                </tr>
-                <tr>
-                    <td>&gt;=</td>
-                    <td>Больше или равно</td>
-                    <td>a &gt;= b</td>
-                </tr>
-            </table>
+        <h2>Операторы сравнения</h2>
+        <p>
+          Перед изучением условных операторов важно разобрать операторы
+          сравнения:
+        </p>
 
-            <h3>Примеры использования:</h3>
-            <div class="code-block"><pre><code>a = 5
+        <table class="comparison-table">
+          <tr>
+            <th>Оператор</th>
+            <th>Описание</th>
+            <th>Пример</th>
+          </tr>
+          <tr>
+            <td>==</td>
+            <td>Равно</td>
+            <td>a == b</td>
+          </tr>
+          <tr>
+            <td>!=</td>
+            <td>Не равно</td>
+            <td>a != b</td>
+          </tr>
+          <tr>
+            <td>&lt;</td>
+            <td>Меньше</td>
+            <td>a &lt; b</td>
+          </tr>
+          <tr>
+            <td>&gt;</td>
+            <td>Больше</td>
+            <td>a &gt; b</td>
+          </tr>
+          <tr>
+            <td>&lt;=</td>
+            <td>Меньше или равно</td>
+            <td>a &lt;= b</td>
+          </tr>
+          <tr>
+            <td>&gt;=</td>
+            <td>Больше или равно</td>
+            <td>a &gt;= b</td>
+          </tr>
+        </table>
+
+        <h3>Примеры использования:</h3>
+        <div class="code-block">
+          <pre><code>a = 5
 b = 10
 print(a == b)  # False
 print(a != b)  # True
 print(a < b)   # True
-print(a >= 5)  # True</code></pre></div>
+print(a >= 5)  # True</code></pre>
+        </div>
 
-            <h2>Логические операторы</h2>
-            <p>Для комбинирования условий используются логические операторы:</p>
+        <h2>Логические операторы</h2>
+        <p>Для комбинирования условий используются логические операторы:</p>
 
-            <ul>
-                <li><strong>and</strong> - логическое И (возвращает True, если оба условия истинны)</li>
-                <li><strong>or</strong> - логическое ИЛИ (возвращает True, если хотя бы одно условие истинно)</li>
-                <li><strong>not</strong> - логическое НЕ (инвертирует результат)</li>
-            </ul>
+        <ul>
+          <li>
+            <strong>and</strong> - логическое И (возвращает True, если оба
+            условия истинны)
+          </li>
+          <li>
+            <strong>or</strong> - логическое ИЛИ (возвращает True, если хотя бы
+            одно условие истинно)
+          </li>
+          <li><strong>not</strong> - логическое НЕ (инвертирует результат)</li>
+        </ul>
 
-            <h3>Примеры:</h3>
-            <div class="code-block"><pre><code>age = 25
+        <h3>Примеры:</h3>
+        <div class="code-block">
+          <pre><code>age = 25
 grade = 4.5
 
 if age >= 18 and grade >= 4.0:
@@ -537,37 +561,60 @@ if age < 18 or grade < 3.0:
     print("Требуется сопровождение")
 
 if not age < 18:
-    print("Совершеннолетний")</code></pre></div>
+    print("Совершеннолетний")</code></pre>
+        </div>
 
-            <h2>Оператор if</h2>
-            <p>Оператор <strong>if</strong> используется для выполнения кода, если условие истинно.</p>
-            <div class="code-block"><pre><code>x = int(input("Введите число: "))
+        <h2>Оператор if</h2>
+        <p>
+          Оператор <strong>if</strong> используется для выполнения кода, если
+          условие истинно.
+        </p>
+        <div class="code-block">
+          <pre><code>x = int(input("Введите число: "))
 if x > 5:
-    print("x больше 5")</code></pre></div>
+    print("x больше 5")</code></pre>
+        </div>
 
-            <div class="note"><strong>Важно:</strong> Обратите внимание на отступ (indentation) после двоеточия. В Python это обязательно!</div>
+        <div class="note">
+          <strong>Важно:</strong> Обратите внимание на отступ (indentation)
+          после двоеточия. В Python это обязательно!
+        </div>
 
-            <h2>Оператор else</h2>
-            <p>Оператор <strong>else</strong> используется для выполнения кода, если условие в if ложно.</p>
-            <div class="code-block"><pre><code>x = int(input("Введите число: "))
+        <h2>Оператор else</h2>
+        <p>
+          Оператор <strong>else</strong> используется для выполнения кода, если
+          условие в if ложно.
+        </p>
+        <div class="code-block">
+          <pre><code>x = int(input("Введите число: "))
 if x > 5:
     print("x больше 5")
 else:
-    print("x меньше или равно 5")</code></pre></div>
+    print("x меньше или равно 5")</code></pre>
+        </div>
 
-            <h2>Оператор elif</h2>
-            <p>Оператор <strong>elif</strong> используется для проверки нескольких условий. Это сокращение от "else if".</p>
-            <div class="code-block"><pre><code>x = int(input("Введите число: "))
+        <h2>Оператор elif</h2>
+        <p>
+          Оператор <strong>elif</strong> используется для проверки нескольких
+          условий. Это сокращение от "else if".
+        </p>
+        <div class="code-block">
+          <pre><code>x = int(input("Введите число: "))
 if x > 10:
     print("x больше 10")
 elif x > 5:
     print("x больше 5, но меньше или равно 10")
 else:
-    print("x меньше или равно 5")</code></pre></div>
+    print("x меньше или равно 5")</code></pre>
+        </div>
 
-            <h2>Комбинирование условий</h2>
-            <p>Операторы сравнения и логические операторы можно комбинировать для создания сложных условий:</p>
-            <div class="code-block"><pre><code>temperature = 22
+        <h2>Комбинирование условий</h2>
+        <p>
+          Операторы сравнения и логические операторы можно комбинировать для
+          создания сложных условий:
+        </p>
+        <div class="code-block">
+          <pre><code>temperature = 22
 is_weekend = True
 
 if temperature >= 25 and is_weekend:
@@ -577,25 +624,37 @@ elif temperature >= 25 and not is_weekend:
 elif 15 <= temperature < 25:
     print("Хорошая погода для прогулки")
 else:
-    print("Лучше остаться дома")</code></pre></div>
+    print("Лучше остаться дома")</code></pre>
+        </div>
 
-            <h2>Оператор input</h2>
-            <p>Функция <strong>input()</strong> используется для ввода данных с клавиатуры. По умолчанию она возвращает строку, поэтому для работы с числами нужно преобразовать результат с помощью <code>int()</code> или <code>float()</code>.</p>
+        <h2>Оператор input</h2>
+        <p>
+          Функция <strong>input()</strong> используется для ввода данных с
+          клавиатуры. По умолчанию она возвращает строку, поэтому для работы с
+          числами нужно преобразовать результат с помощью <code>int()</code> или
+          <code>float()</code>.
+        </p>
 
-            <h3>Пример:</h3>
-            <div class="code-block"><pre><code>name = input("Введите ваше имя: ")
+        <h3>Пример:</h3>
+        <div class="code-block">
+          <pre><code>name = input("Введите ваше имя: ")
 age = int(input("Введите ваш возраст: "))
-print(f"Привет, {name}! Тебе {age} лет.")</code></pre></div>
+print(f"Привет, {name}! Тебе {age} лет.")</code></pre>
+        </div>
 
-            <h3>Параметры input:</h3>
-            <ul>
-                <li><strong>prompt:</strong> Сообщение, которое отображается перед вводом данных.</li>
-                <li><strong>Возвращаемое значение:</strong> Всегда строка (str).</li>
-            </ul>
+        <h3>Параметры input:</h3>
+        <ul>
+          <li>
+            <strong>prompt:</strong> Сообщение, которое отображается перед
+            вводом данных.
+          </li>
+          <li><strong>Возвращаемое значение:</strong> Всегда строка (str).</li>
+        </ul>
 
-            <h2>Структура условных операторов</h2>
-            <p>Вот общая структура условных операторов в Python:</p>
-            <div class="code-block"><pre><code>if условие_1:
+        <h2>Структура условных операторов</h2>
+        <p>Вот общая структура условных операторов в Python:</p>
+        <div class="code-block">
+          <pre><code>if условие_1:
     # Код если условие_1 истинно
     действие_1
 elif условие_2:
@@ -606,129 +665,154 @@ elif условие_3:
     действие_3
 else:
     # Код если никакое условие не истинно
-    действие_4</code></pre></div>
-
-            <div class="note"><strong>Совет:</strong> Количество <code>elif</code> блоков может быть неограниченным, но <code>else</code> блок может быть только один и только в конце.</div>
-
-            <h2>Заключение</h2>
-            <p>Теперь вы знаете, как использовать условные операторы и функцию input в Python. Условные операторы — это фундаментальный инструмент для управления потоком выполнения программы. В следующем занятии мы изучим циклы.</p>
-
-            <h2>Практика</h2>
-            <div class="mission">
-                <h3>🎯 Определить статус пользователя</h3>
-                <p><strong>🔍 Контекст:</strong> Вам решать, кто child, а кто adult в этом цифровом королевстве!</p>
-                
-                <p><strong>⚙️ Техзадание:</strong></p>
-                <ul>
-                    <li>Запросите имя и возраст</li>
-                    <li>Используйте if-elif-else:
-                        <ul>
-                            <li>&lt;18 → child</li>
-                            <li>18-60 → adult</li>
-                            <li>&gt;60 → senior</li>
-                        </ul>
-                    </li>
-                </ul>
-                
-                <p><strong>Пример входных данных:</strong></p>
-                <div class="code-block"><pre><code>Имя: Артур
-Возраст: 35</code></pre></div>
-                
-                <p><strong>Ожидаемый вывод:</strong></p>
-                <div class="code-block"><pre><code>Артур, ты adult!</code></pre></div>
-                
-                <p><strong>💡 Подсказка:</strong> <code>int(input())</code> не забыть!</p>
-
-            <h2>Дополнительные задания</h2>
-            <p>Ниже — короткие практические задачи для закрепления навыков работы с условными операторами.</p>
-
-            <h3>1) Решение, пить ли жаропонижающее</h3>
-            <p>измерить температуру тела;<br>
-                если температура выше 38 °C — принять жаропонижающее и обратиться к врачу;<br>
-                если температура ниже или равна 38 °C — не принимать лекарство, наблюдать за состоянием.</p>
-
-            <h3>2) Решение, поливать ли растение:</h3>
-            <p>проверить влажность почвы;<br>
-                если почва сухая — полить растение;<br>
-                если почва влажная — не поливать.</p>
-
-            <h3>3) Решение, надевать ли шапку:</h3>
-            <p>если температура ниже 10 °C — надеть шапку;<br>
-                если температура выше 10 °C — не надевать шапку.</p>
-            
-
-            <h3>4) Решение, ехать ли на общественном транспорте:</h3>
-            <p>проверить время до отправления ближайшего транспорта;<br>
-                если время отправления в ближайшие 5 минут — идти к остановке;<br>
-                если времени до отправления больше 10 минут — рассмотреть другие варианты транспорта (например, такси или пешую прогулку).
-            </p>
-            
-
-            <h3>5) Количество отрицательных среди трёх чисел</h3>
-            <p>Вводим три числа — считаем, сколько из них отрицательные.</p>
-            
-
-            <h3>6) Количество корней квадратного уравнения</h3>
-            <p>Для ax² + bx + c определяем количество действительных корней.</p>
-            
-
-            <h3>7) Возможность построить треугольник</h3>
-            <p>Проверяем неравенство треугольника по трём сторонам.</p>
-            
-
-            <h3>8) Принадлежность диапазону</h3>
-            <p>Проверить, принадлежит ли диапазону от a до b число c</p>
-            
-
-            </div>
+    действие_4</code></pre>
         </div>
+
+        <div class="note">
+          <strong>Совет:</strong> Количество <code>elif</code> блоков может быть
+          неограниченным, но <code>else</code> блок может быть только один и
+          только в конце.
+        </div>
+
+        <h2>Заключение</h2>
+        <p>
+          Теперь вы знаете, как использовать условные операторы и функцию input
+          в Python. Условные операторы — это фундаментальный инструмент для
+          управления потоком выполнения программы. В следующем занятии мы изучим
+          циклы.
+        </p>
+
+        <h2>Практика</h2>
+        <div class="mission">
+          <h3>Задание 1. Определить статус пользователя</h3>
+          <p>
+            <strong>🔍 Контекст:</strong> Вам решать, кто child, а кто adult в
+            этом цифровом королевстве!
+          </p>
+
+          <p><strong>⚙️ Техзадание:</strong></p>
+          <ul>
+            <li>Запросите имя и возраст</li>
+            <li>
+              Используйте if-elif-else:
+              <ul>
+                <li>&lt;18 → child</li>
+                <li>18-60 → adult</li>
+                <li>&gt;60 → senior</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Пример входных данных:</strong></p>
+          <div class="code-block">
+            <pre><code>Имя: Артур
+Возраст: 35</code></pre>
+          </div>
+
+          <p><strong>Ожидаемый вывод:</strong></p>
+          <div class="code-block">
+            <pre><code>Артур, ты adult!</code></pre>
+          </div>
+
+          <p>
+            <strong>💡 Подсказка:</strong> <code>int(input())</code> не забыть!
+          </p>
+
+          <h2></h2>
+
+          <h3>Задание 2. Решение, пить ли жаропонижающее</h3>
+          <p>
+            измерить температуру тела;<br />
+            если температура выше 38 °C — принять жаропонижающее и обратиться к
+            врачу;<br />
+            если температура ниже или равна 38 °C — не принимать лекарство,
+            наблюдать за состоянием.
+          </p>
+
+          <h3>Задание 3. Решение, поливать ли растение:</h3>
+          <p>
+            проверить влажность почвы;<br />
+            если почва сухая — полить растение;<br />
+            если почва влажная — не поливать.
+          </p>
+
+          <h3>Задание 4. Решение, надевать ли шапку:</h3>
+          <p>
+            если температура ниже 10 °C — надеть шапку;<br />
+            если температура выше 10 °C — не надевать шапку.
+          </p>
+
+          <h3>Задание 5. Решение, ехать ли на общественном транспорте:</h3>
+          <p>
+            проверить время до отправления ближайшего транспорта;<br />
+            если время отправления в ближайшие 5 минут — идти к остановке;<br />
+            если времени до отправления больше 10 минут — рассмотреть другие
+            варианты транспорта (например, такси или пешую прогулку).
+          </p>
+
+          <h3>Задание 6. Количество отрицательных среди трёх чисел</h3>
+          <p>Вводим три числа — считаем, сколько из них отрицательные.</p>
+
+          <h3>Задание 7. Количество корней квадратного уравнения</h3>
+          <p>Для ax² + bx + c определяем количество действительных корней.</p>
+
+          <h3>Задание 8. Возможность построить треугольник</h3>
+          <p>Проверяем неравенство треугольника по трём сторонам.</p>
+
+          <h3>Задание 9. Принадлежность диапазону</h3>
+          <p>Проверить, принадлежит ли диапазону от a до b число c</p>
+        </div>
+      </div>
     </main>
 
     <footer>
-        <p><strong>&copy; 2026 Python Lessons</strong> - Полный курс программирования на Python</p>
+      <p>
+        <strong>&copy; 2026 Python Lessons</strong> - Полный курс
+        программирования на Python
+      </p>
     </footer>
 
     <script>
-        // Мобильное меню
-        const navToggle = document.querySelector('.nav-toggle');
-        const nav = document.querySelector('nav');
-        const dropdown = document.querySelector('.dropdown');
-        const dropdownToggle = dropdown.querySelector('a');
-        
-        navToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
+      // Мобильное меню
+      const navToggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector("nav");
+      const dropdown = document.querySelector(".dropdown");
+      const dropdownToggle = dropdown.querySelector("a");
+
+      navToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+
+      // Управление выпадающим меню на мобильных устройствах
+      dropdownToggle.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          dropdown.classList.toggle("active");
+        }
+      });
+
+      // Закрытие меню при клике на ссылку в выпадающем списке
+      document.querySelectorAll(".dropdown-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          dropdown.classList.remove("active");
         });
-        
-        // Управление выпадающим меню на мобильных устройствах
-        dropdownToggle.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            }
+      });
+
+      // Закрытие навигации при клике на остальные ссылки
+      document.querySelectorAll("nav > a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          dropdown.classList.remove("active");
         });
-        
-        // Закрытие меню при клике на ссылку в выпадающем списке
-        document.querySelectorAll('.dropdown-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                dropdown.classList.remove('active');
-            });
-        });
-        
-        // Закрытие навигации при клике на остальные ссылки
-        document.querySelectorAll('nav > a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                dropdown.classList.remove('active');
-            });
-        });
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', (e) => {
-            if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
-                nav.classList.remove('active');
-            }
-        });
+      });
+
+      // Закрытие меню при клике вне его
+      document.addEventListener("click", (e) => {
+        if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

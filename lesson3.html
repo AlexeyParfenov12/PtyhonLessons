@@ -1,565 +1,644 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Циклы - Python Lessons</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #3776ab;
-            --secondary-color: #ffd700;
-            --dark-bg: #0f1419;
-            --light-bg: #f8f9fa;
-            --text-dark: #2c3e50;
-            --text-light: #ffffff;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--light-bg);
-        }
-        
-        /* Заголовок и навигация */
-        header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #2d5a8c 100%);
-            color: var(--text-light);
-            padding: 0;
-            box-shadow: var(--card-shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary-color: #3776ab;
+        --secondary-color: #e07800;
+        --dark-bg: #0f1419;
+        --light-bg: #f8f9fa;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text-dark);
+        background-color: var(--light-bg);
+      }
+
+      /* Заголовок и навигация */
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          #2d5a8c 100%
+        );
+        color: var(--text-light);
+        padding: 0;
+        box-shadow: var(--card-shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 28px;
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--text-light);
+      }
+
+      nav {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      nav a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: var(--secondary-color);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--secondary-color);
+        transition: var(--transition);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown > a::after {
+        content: "▼";
+        font-size: 10px;
+        margin-left: 8px;
+        position: static;
+        height: auto;
+        width: auto;
+        background: none;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--primary-color);
+        min-width: 280px;
+        box-shadow: var(--card-shadow);
+        border-radius: 5px;
+        margin-top: 10px;
+        overflow: hidden;
+        z-index: 1001;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 12px 20px;
+        color: var(--text-light);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition);
+        font-weight: 400;
+        font-size: 14px;
+      }
+
+      .dropdown-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .dropdown-menu a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: var(--secondary-color);
+        padding-left: 25px;
+      }
+
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 6px;
+      }
+
+      .nav-toggle span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-light);
+        border-radius: 3px;
+      }
+
+      /* Основная часть */
+      main {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .page-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .page-title h1 {
+        font-size: 42px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .page-title p {
+        font-size: 18px;
+        color: #666;
+      }
+
+      .content {
+        background: var(--text-light);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+        line-height: 1.8;
+      }
+
+      .content h2 {
+        color: var(--primary-color);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 24px;
+        border-left: 4px solid var(--secondary-color);
+        padding-left: 15px;
+      }
+
+      .content h3 {
+        color: var(--primary-color);
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .content h4 {
+        color: var(--primary-color);
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-size: 16px;
+      }
+
+      .content p {
+        margin-bottom: 15px;
+        text-align: justify;
+      }
+
+      .content ul {
+        margin: 15px 0 15px 30px;
+        list-style-type: disc;
+      }
+
+      .content li {
+        margin-bottom: 8px;
+      }
+
+      .content li strong {
+        color: var(--primary-color);
+      }
+
+      .content ol {
+        margin: 15px 0 15px 30px;
+        list-style-type: decimal;
+      }
+
+      .content ol li {
+        margin-bottom: 12px;
+      }
+
+      .code-block {
+        background-color: #f5f5f5;
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        overflow-x: auto;
+        line-height: 1.4;
+      }
+
+      .code-block code {
+        color: #333;
+        font-size: 14px;
+      }
+
+      .note {
+        background-color: #e3f2fd;
+        border-left: 4px solid var(--primary-color);
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 5px;
+      }
+
+      .note strong {
+        color: var(--primary-color);
+      }
+
+      .mission {
+        background-color: #fff3e0;
+        border-left: 4px solid var(--secondary-color);
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 5px;
+      }
+
+      .mission h3 {
+        color: var(--secondary-color);
+        margin-top: 0;
+      }
+
+      .mission ul {
+        margin-left: 20px;
+      }
+
+      /* Подвал */
+      footer {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
+        color: var(--text-light);
+        text-align: center;
+        padding: 30px 0;
+        margin-top: 60px;
+        border-top: 3px solid var(--primary-color);
+      }
+
+      footer p {
+        margin-bottom: 10px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+      }
+
+      .footer-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--text-light);
+      }
+
+      /* Адаптивный дизайн */
+      @media (max-width: 768px) {
         .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
+          padding: 15px 10px;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 28px;
-            font-weight: bold;
-            text-decoration: none;
-            color: var(--text-light);
-        }
-        
+
         nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          gap: 0;
+          background-color: var(--primary-color);
+          padding: 20px;
         }
-        
+
+        nav.active {
+          display: flex;
+        }
+
         nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: var(--transition);
-            position: relative;
+          padding: 12px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        nav a:hover {
-            background-color: rgba(255, 215, 0, 0.2);
-            color: var(--secondary-color);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--secondary-color);
-            transition: var(--transition);
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        .dropdown {
-            position: relative;
-        }
-        
-        .dropdown > a::after {
-            content: '▼';
-            font-size: 10px;
-            margin-left: 8px;
-            position: static;
-            height: auto;
-            width: auto;
-            background: none;
-        }
-        
+
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--primary-color);
-            min-width: 280px;
-            box-shadow: var(--card-shadow);
-            border-radius: 5px;
-            margin-top: 10px;
-            overflow: hidden;
-            z-index: 1001;
+          display: none;
+          position: static;
+          background-color: rgba(45, 90, 140, 0.95);
+          box-shadow: none;
+          margin-top: 0;
+          border-radius: 0;
         }
-        
+
         .dropdown:hover .dropdown-menu {
-            display: block;
+          display: none;
         }
-        
+
+        .dropdown.active .dropdown-menu {
+          display: block;
+        }
+
         .dropdown-menu a {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-light);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            font-weight: 400;
-            font-size: 14px;
+          padding: 12px 0 12px 30px;
+          font-size: 13px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
-        .dropdown-menu a:last-child {
-            border-bottom: none;
-        }
-        
+
         .dropdown-menu a:hover {
-            background-color: rgba(255, 215, 0, 0.2);
-            color: var(--secondary-color);
-            padding-left: 25px;
+          padding-left: 35px;
         }
-        
+
         .nav-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 6px;
+          display: flex;
         }
-        
-        .nav-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-light);
-            border-radius: 3px;
-        }
-        
-        /* Основная часть */
-        main {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        
-        .page-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
+
         .page-title h1 {
-            font-size: 42px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+          font-size: 28px;
         }
-        
-        .page-title p {
-            font-size: 18px;
-            color: #666;
-        }
-        
+
         .content {
-            background: var(--text-light);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: var(--card-shadow);
-            line-height: 1.8;
+          padding: 20px;
         }
-        
-        .content h2 {
-            color: var(--primary-color);
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 24px;
-            border-left: 4px solid var(--secondary-color);
-            padding-left: 15px;
-        }
-        
-        .content h3 {
-            color: var(--primary-color);
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-        
-        .content h4 {
-            color: var(--primary-color);
-            margin-top: 15px;
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-        
-        .content p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        
-        .content ul {
-            margin: 15px 0 15px 30px;
-            list-style-type: disc;
-        }
-        
-        .content li {
-            margin-bottom: 8px;
-        }
-        
-        .content li strong {
-            color: var(--primary-color);
-        }
-        
-        .content ol {
-            margin: 15px 0 15px 30px;
-            list-style-type: decimal;
-        }
-        
-        .content ol li {
-            margin-bottom: 12px;
-        }
-        
-        .code-block {
-            background-color: #f5f5f5;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            overflow-x: auto;
-            line-height: 1.4;
-        }
-        
-        .code-block code {
-            color: #333;
-            font-size: 14px;
-        }
-        
-        .note {
-            background-color: #e3f2fd;
-            border-left: 4px solid var(--primary-color);
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        
-        .note strong {
-            color: var(--primary-color);
-        }
-        
-        .mission {
-            background-color: #fff3e0;
-            border-left: 4px solid var(--secondary-color);
-            padding: 20px;
-            margin: 30px 0;
-            border-radius: 5px;
-        }
-        
-        .mission h3 {
-            color: var(--secondary-color);
-            margin-top: 0;
-        }
-        
-        .mission ul {
-            margin-left: 20px;
-        }
-        
-        /* Подвал */
-        footer {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f26 100%);
-            color: var(--text-light);
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 60px;
-            border-top: 3px solid var(--primary-color);
-        }
-        
-        footer p {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        
-        .footer-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--text-light);
-        }
-        
-        /* Адаптивный дизайн */
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 15px 10px;
-            }
-            
-            nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                gap: 0;
-                background-color: var(--primary-color);
-                padding: 20px;
-            }
-            
-            nav.active {
-                display: flex;
-            }
-            
-            nav a {
-                padding: 12px 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .dropdown-menu {
-                display: none;
-                position: static;
-                background-color: rgba(45, 90, 140, 0.95);
-                box-shadow: none;
-                margin-top: 0;
-                border-radius: 0;
-            }
-            
-            .dropdown:hover .dropdown-menu {
-                display: none;
-            }
-            
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-            
-            .dropdown-menu a {
-                padding: 12px 0 12px 30px;
-                font-size: 13px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            }
-            
-            .dropdown-menu a:hover {
-                padding-left: 35px;
-            }
-            
-            .nav-toggle {
-                display: flex;
-            }
-            
-            .page-title h1 {
-                font-size: 28px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="header-container">
-            <a href="index.html" class="logo">
-                <span>PyLearn</span>
-            </a>
-            <nav>
-                <a href="index.html">Главная</a>
-                <div class="dropdown">
-                    <a href="index.html#lessons">Уроки</a>
-                    <div class="dropdown-menu">
-                        <a href="intro.html">📚 Введение в Python</a>
-                        <a href="lesson1.html">1. Переменные и типы данных</a>
-                        <a href="lesson2.html">2. Условные операторы</a>
-                        <a href="lesson3.html">3. Циклы</a>
-                        <a href="lesson4.html">4. Функции</a>
-                        <a href="lesson5.html">5. Списки и кортежи</a>
-                        <a href="lesson6.html">6. Словари</a>
-                        <a href="lesson7.html">7. Множества</a>
-                        <a href="lesson8.html">8. Работа с файлами</a>
-                        <a href="lesson9.html">9. Обработка исключений</a>
-                        <a href="lesson10.html">10. Модули и пакеты</a>
-                        <a href="lesson11.html">11. Классы и объекты</a>
-                        <a href="lesson12.html">12. Наследование и полиморфизм</a>
-                        <a href="lesson13.html">13. Работа с библиотеками</a>
-                        <a href="lesson14.html">14. Итоговый проект</a>
-                    </div>
-                </div>
-            </nav>
-            <div class="nav-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <span>PyLearn</span>
+        </a>
+        <nav>
+          <a href="index.html">Главная</a>
+          <div class="dropdown">
+            <a href="index.html#lessons">Уроки</a>
+            <div class="dropdown-menu">
+              <a href="intro.html">📚 Введение в Python</a>
+              <a href="lesson1.html">1. Переменные и типы данных</a>
+              <a href="lesson2.html">2. Условные операторы</a>
+              <a href="lesson3.html">3. Циклы</a>
+              <a href="lesson4.html">4. Функции</a>
+              <a href="lesson5.html">5. Списки и кортежи</a>
+              <a href="lesson6.html">6. Словари</a>
+              <a href="lesson7.html">7. Множества</a>
+              <a href="lesson8.html">8. Работа с файлами</a>
+              <a href="lesson9.html">9. Обработка исключений</a>
+              <a href="lesson10.html">10. Модули и пакеты</a>
+              <a href="lesson11.html">11. Классы и объекты</a>
+              <a href="lesson12.html">12. Наследование и полиморфизм</a>
+              <a href="lesson13.html">13. Работа с библиотеками</a>
+              <a href="lesson14.html">14. Итоговый проект</a>
             </div>
+          </div>
+        </nav>
+        <div class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
+      </div>
     </header>
 
     <main>
-        <div class="page-title">
-            <h1>Циклы</h1>
-            <p>Изучение циклов for и while</p>
+      <div class="page-title">
+        <h1>Циклы</h1>
+        <p>Изучение циклов for и while</p>
+      </div>
+
+      <div class="content">
+        <h2>Введение</h2>
+        <p>
+          В этом занятии мы изучим, как использовать циклы в Python. Циклы
+          позволяют повторять выполнение блока кода несколько раз. Это экономит
+          время и упрощает написание кода.
+        </p>
+
+        <h2>Цикл for</h2>
+        <p>
+          Цикл <strong>for</strong> используется для перебора элементов
+          последовательности (например, списка или строки).
+        </p>
+        <div class="code-block">
+          <pre><code>fruits = ["яблоко", "банан", "вишня"]  # Это список - тип данных для хранения набора элементов
+for fruit in fruits:
+    print(fruit)</code></pre>
         </div>
 
-        <div class="content">
-            <h2>Введение</h2>
-            <p>В этом занятии мы изучим, как использовать циклы в Python. Циклы позволяют повторять выполнение блока кода несколько раз. Это экономит время и упрощает написание кода.</p>
-
-            <h2>Цикл for</h2>
-            <p>Цикл <strong>for</strong> используется для перебора элементов последовательности (например, списка или строки).</p>
-            <div class="code-block"><pre><code>fruits = ["яблоко", "банан", "вишня"]  # Это список - тип данных для хранения набора элементов
-for fruit in fruits:
-    print(fruit)</code></pre></div>
-
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>яблоко
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>яблоко
 банан
-вишня</code></pre></div>
+вишня</code></pre>
+        </div>
 
-            <h3>Функция range</h3>
-            <p>Функция <strong>range()</strong> генерирует последовательность чисел и часто используется с циклом for:</p>
-            <div class="code-block"><pre><code>for i in range(5):  # от 0 до 4 (не включая 5)
-    print(i)</code></pre></div>
+        <h3>Функция range</h3>
+        <p>
+          Функция <strong>range()</strong> генерирует последовательность чисел и
+          часто используется с циклом for:
+        </p>
+        <div class="code-block">
+          <pre><code>for i in range(5):  # от 0 до 4 (не включая 5)
+    print(i)</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>0
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>0
 1
 2
 3
-4</code></pre></div>
+4</code></pre>
+        </div>
 
-            <p>Функция range может принимать три параметра: <code>range(start, stop, step)</code></p>
-            <div class="code-block"><pre><code>for i in range(1, 11, 2):  # от 1 до 10 с шагом 2
-    print(i)</code></pre></div>
+        <p>
+          Функция range может принимать три параметра:
+          <code>range(start, stop, step)</code>
+        </p>
+        <div class="code-block">
+          <pre><code>for i in range(1, 11, 2):  # от 1 до 10 с шагом 2
+    print(i)</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>1
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>1
 3
 5
 7
-9</code></pre></div>
+9</code></pre>
+        </div>
 
-            <h3>Функция enumerate</h3>
-            <p>Функция <strong>enumerate</strong> позволяет получить индекс и значение элемента при переборе списка:</p>
-            <div class="code-block"><pre><code>fruits = ["яблоко", "банан", "вишня"]
+        <h3>Функция enumerate</h3>
+        <p>
+          Функция <strong>enumerate</strong> позволяет получить индекс и
+          значение элемента при переборе списка:
+        </p>
+        <div class="code-block">
+          <pre><code>fruits = ["яблоко", "банан", "вишня"]
 for index, fruit in enumerate(fruits):
-    print(f"Индекс: {index}, Фрукт: {fruit}")</code></pre></div>
+    print(f"Индекс: {index}, Фрукт: {fruit}")</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>Индекс: 0, Фрукт: яблоко
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>Индекс: 0, Фрукт: яблоко
 Индекс: 1, Фрукт: банан
-Индекс: 2, Фрукт: вишня</code></pre></div>
+Индекс: 2, Фрукт: вишня</code></pre>
+        </div>
 
-            <h2>Цикл while</h2>
-            <p>Цикл <strong>while</strong> выполняет блок кода, пока условие истинно.</p>
-            <div class="code-block"><pre><code>x = 0
+        <h2>Цикл while</h2>
+        <p>
+          Цикл <strong>while</strong> выполняет блок кода, пока условие истинно.
+        </p>
+        <div class="code-block">
+          <pre><code>x = 0
 while x < 5:
     print(x)
-    x += 1  # Увеличение x на 1 каждый шаг</code></pre></div>
+    x += 1  # Увеличение x на 1 каждый шаг</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>0
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>0
 1
 2
 3
-4</code></pre></div>
+4</code></pre>
+        </div>
 
-            <div class="note"><strong>Важно:</strong> Убедитесь, что условие в while в конце концов станет ложным. Иначе цикл будет бесконечным!</div>
+        <div class="note">
+          <strong>Важно:</strong> Убедитесь, что условие в while в конце концов
+          станет ложным. Иначе цикл будет бесконечным!
+        </div>
 
-            <h2>Управление циклами</h2>
-            <p>Существуют два оператора для управления циклами:</p>
+        <h2>Управление циклами</h2>
+        <p>Существуют два оператора для управления циклами:</p>
 
-            <h3>Оператор break</h3>
-            <p><strong>break</strong> прерывает выполнение цикла и переходит к коду после цикла.</p>
-            <div class="code-block"><pre><code>for i in range(10):
+        <h3>Оператор break</h3>
+        <p>
+          <strong>break</strong> прерывает выполнение цикла и переходит к коду
+          после цикла.
+        </p>
+        <div class="code-block">
+          <pre><code>for i in range(10):
     if i == 5:
         break
-    print(i)</code></pre></div>
+    print(i)</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>0
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>0
 1
 2
 3
-4</code></pre></div>
+4</code></pre>
+        </div>
 
-            <h3>Оператор continue</h3>
-            <p><strong>continue</strong> пропускает текущую итерацию и переходит к следующей.</p>
-            <div class="code-block"><pre><code>for i in range(10):
+        <h3>Оператор continue</h3>
+        <p>
+          <strong>continue</strong> пропускает текущую итерацию и переходит к
+          следующей.
+        </p>
+        <div class="code-block">
+          <pre><code>for i in range(10):
     if i % 2 == 0:  # Оператор % возвращает остаток от деления
         continue    # Пропускаем чётные числа
-    print(i)</code></pre></div>
+    print(i)</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>1
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>1
 3
 5
 7
-9</code></pre></div>
+9</code></pre>
+        </div>
 
-            <h2>Оператор модуля (%)</h2>
-            <p>Оператор <strong>%</strong> возвращает остаток от деления двух чисел:</p>
-            <div class="code-block"><pre><code>print(10 % 3)   # 1
+        <h2>Оператор модуля (%)</h2>
+        <p>
+          Оператор <strong>%</strong> возвращает остаток от деления двух чисел:
+        </p>
+        <div class="code-block">
+          <pre><code>print(10 % 3)   # 1
 print(15 % 5)   # 0
 print(7 % 2)    # 1 (если число нечётное)
-print(8 % 2)    # 0 (если число чётное)</code></pre></div>
+print(8 % 2)    # 0 (если число чётное)</code></pre>
+        </div>
 
-            <p>Оператор % часто используется для проверки чётности числа:</p>
-            <div class="code-block"><pre><code>if number % 2 == 0:
+        <p>Оператор % часто используется для проверки чётности числа:</p>
+        <div class="code-block">
+          <pre><code>if number % 2 == 0:
     print("Число чётное")
 else:
-    print("Число нечётное")</code></pre></div>
+    print("Число нечётное")</code></pre>
+        </div>
 
-            <h2>Синтаксис циклов</h2>
-            <p>При написании циклов важно соблюдать следующие правила:</p>
+        <h2>Синтаксис циклов</h2>
+        <p>При написании циклов важно соблюдать следующие правила:</p>
 
-            <ul>
-                <li>Используйте отступы (4 пробела) для обозначения блока кода внутри цикла.</li>
-                <li>После условия цикла (for, while) ставьте двоеточие (:).</li>
-                <li>Используйте break и continue для управления выполнением цикла.</li>
-                <li>Убедитесь, что условие в while будет рано или поздно ложным, иначе цикл будет бесконечным.</li>
-            </ul>
+        <ul>
+          <li>
+            Используйте отступы (4 пробела) для обозначения блока кода внутри
+            цикла.
+          </li>
+          <li>После условия цикла (for, while) ставьте двоеточие (:).</li>
+          <li>
+            Используйте break и continue для управления выполнением цикла.
+          </li>
+          <li>
+            Убедитесь, что условие в while будет рано или поздно ложным, иначе
+            цикл будет бесконечным.
+          </li>
+        </ul>
 
-            <h2>Вложенные циклы</h2>
-            <p>Циклы можно вкладывать один в другой:</p>
-            <div class="code-block"><pre><code>for i in range(1, 4):
+        <h2>Вложенные циклы</h2>
+        <p>Циклы можно вкладывать один в другой:</p>
+        <div class="code-block">
+          <pre><code>for i in range(1, 4):
     for j in range(1, 4):
-        print(f"{i} x {j} = {i * j}")</code></pre></div>
+        print(f"{i} x {j} = {i * j}")</code></pre>
+        </div>
 
-            <p><strong>Вывод:</strong></p>
-            <div class="code-block"><pre><code>1 x 1 = 1
+        <p><strong>Вывод:</strong></p>
+        <div class="code-block">
+          <pre><code>1 x 1 = 1
 1 x 2 = 2
 1 x 3 = 3
 2 x 1 = 2
@@ -567,29 +646,61 @@ else:
 2 x 3 = 6
 3 x 1 = 3
 3 x 2 = 6
-3 x 3 = 9</code></pre></div>
+3 x 3 = 9</code></pre>
+        </div>
 
-            <h2>Заключение</h2>
-            <p>Теперь вы знаете, как использовать циклы в Python. Циклы — это мощный инструмент для автоматизации повторяющихся задач. В следующем занятии мы изучим функции.</p>
+        <h2>Заключение</h2>
+        <p>
+          Теперь вы знаете, как использовать циклы в Python. Циклы — это мощный
+          инструмент для автоматизации повторяющихся задач. В следующем занятии
+          мы изучим функции.
+        </p>
 
-            <h2>Практика</h2>
-            <div class="mission">
-                <h3>🎯 Стать детективом чисел</h3>
-                <p><strong>🔍 Контекст:</strong> Чётные и нечётные — как инь и янь программирования!</p>
-                
-                <p><strong>⚙️ Техзадание:</strong></p>
-                <ul>
-                    <li>Запросите число N</li>
-                    <li>Цикл for: выведите числа 1-N с пометкой чётности</li>
-                    <li>Цикл while: обратный порядок с пропуском 3</li>
-                    <li>Используйте break при 0</li>
-                </ul>
-                
-                <p><strong>Пример входных данных:</strong></p>
-                <div class="code-block"><pre><code>Введите число: 5</code></pre></div>
-                
-                <p><strong>Ожидаемый вывод:</strong></p>
-                <div class="code-block"><pre><code>Прямой порядок:
+        <h2>Практика</h2>
+        <div class="mission">
+          <h3>Задание 1. Проверка пароля:</h3>
+          <p>
+            Составить программу, которая запрашивает пароль (четырехзначное
+            целое число) до тех пор, пока не будет правильно введен
+          </p>
+
+          <h3>Задание 2. Факториал числа:</h3>
+          <p>
+            Вычислить факториал числа n!. Факториал равен произведению всех
+            чисел от 1 до n – 1*2*3*….*n
+          </p>
+
+          <h3>Задание 3. Подсчет цифр в числе:</h3>
+          <p>Посчитать сколько раз в натуральном числе N встретилась цифра M</p>
+
+          <h3>Задание 4. Минимальная цифра в числе:</h3>
+          <p>
+            Составить программу, которая находит минимальную цифру в заданном
+            натуральном числе
+          </p>
+
+          <h3>Задание 5. Стать детективом чисел</h3>
+          <p>
+            <strong>🔍 Контекст:</strong> Чётные и нечётные — как инь и янь
+            программирования!
+          </p>
+
+          <p><strong>⚙️ Техзадание:</strong></p>
+          <ul>
+            <li>Запросите число N</li>
+            <li>Цикл for: выведите числа 1-N с пометкой чётности</li>
+            <li>Цикл while: обратный порядок с пропуском 3</li>
+            <li>Используйте break при 0</li>
+          </ul>
+
+          <p><strong>Пример входных данных:</strong></p>
+          <div class="code-block">
+            <pre><code>Введите число: 5</code></pre>
+          </div>
+
+          <p><strong>Ожидаемый вывод:</strong></p>
+          <div class="code-block">
+            <pre><code>Прямой порядок:
 1 - нечётное
 2 - чётное
 3 - нечётное
@@ -602,74 +713,62 @@ else:
 3 пропущено
 2
 1
-0 - стоп!</code></pre></div>
-                
-                <p><strong>💡 Подсказка:</strong> % — ваш детектор чётности</p>
-                <h2>Дополнительные задания</h2>
-            <p>Ниже — короткие практические задачи для закрепления навыков работы с условными операторами.</p>
+0 - стоп!</code></pre>
+          </div>
 
-            <h3>1) Проверка пароля:</h3>
-            <p>Составить программу, которая запрашивает пароль (четырехзначное целое число) до тех пор, пока не будет правильно введен</p>
-
-             <h3>1) Факториал числа:</h3>
-            <p>Вычислить факториал числа n!. Факториал равен произведению всех чисел от 1 до n – 1*2*3*….*n</p>
-
-             <h3>1) Подсчет цифр в числе:</h3>
-            <p>Посчитать сколько раз в натуральном числе N встретилась цифра M</p>
-
-             <h3>1) Минимальная цифра в числе:</h3>
-            <p>Составить программу, которая находит минимальную цифру в заданном натуральном числе</p>
-            </div>
+          <p><strong>💡 Подсказка:</strong> % — ваш детектор чётности</p>
         </div>
+      </div>
     </main>
 
     <footer>
-        <p><strong>&copy; 2026 Python Lessons</strong> - Полный курс программирования на Python</p>
-
-        
+      <p>
+        <strong>&copy; 2026 Python Lessons</strong> - Полный курс
+        программирования на Python
+      </p>
     </footer>
 
     <script>
-        // Мобильное меню
-        const navToggle = document.querySelector('.nav-toggle');
-        const nav = document.querySelector('nav');
-        const dropdown = document.querySelector('.dropdown');
-        const dropdownToggle = dropdown.querySelector('a');
-        
-        navToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
+      // Мобильное меню
+      const navToggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector("nav");
+      const dropdown = document.querySelector(".dropdown");
+      const dropdownToggle = dropdown.querySelector("a");
+
+      navToggle.addEventListener("click", () => {
+        nav.classList.toggle("active");
+      });
+
+      // Управление выпадающим меню на мобильных устройствах
+      dropdownToggle.addEventListener("click", (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          dropdown.classList.toggle("active");
+        }
+      });
+
+      // Закрытие меню при клике на ссылку в выпадающем списке
+      document.querySelectorAll(".dropdown-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          dropdown.classList.remove("active");
         });
-        
-        // Управление выпадающим меню на мобильных устройствах
-        dropdownToggle.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                dropdown.classList.toggle('active');
-            }
+      });
+
+      // Закрытие навигации при клике на остальные ссылки
+      document.querySelectorAll("nav > a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("active");
+          dropdown.classList.remove("active");
         });
-        
-        // Закрытие меню при клике на ссылку в выпадающем списке
-        document.querySelectorAll('.dropdown-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                dropdown.classList.remove('active');
-            });
-        });
-        
-        // Закрытие навигации при клике на остальные ссылки
-        document.querySelectorAll('nav > a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                dropdown.classList.remove('active');
-            });
-        });
-        
-        // Закрытие меню при клике вне его
-        document.addEventListener('click', (e) => {
-            if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
-                nav.classList.remove('active');
-            }
-        });
+      });
+
+      // Закрытие меню при клике вне его
+      document.addEventListener("click", (e) => {
+        if (!nav.contains(e.target) && !navToggle.contains(e.target)) {
+          nav.classList.remove("active");
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
