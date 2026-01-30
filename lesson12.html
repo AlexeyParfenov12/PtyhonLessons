@@ -896,7 +896,157 @@ for emp in employees:
 
             <h2>Практика</h2>
             <div class="mission">
-                <h3>🎯 Миссия 13: Организовать транспортный парк</h3>
+                <h3>Задание 1: Наследование базового класса</h3>
+                <p><strong>🔍 Контекст:</strong> Не повторяй код — унаследуй его!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Базовый класс <code>Animal</code> с методом <code>make_sound()</code></li>
+                    <li>Класс <code>Dog</code> наследуется от <code>Animal</code></li>
+                    <li>Класс <code>Cat</code> наследуется от <code>Animal</code></li>
+                    <li>Переопределить метод в подклассах</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Animal:
+    def make_sound(self):
+        return "Издаёт звук"
+
+class Dog(Animal):
+    def make_sound(self):
+        return "Гав!"
+
+class Cat(Animal):
+    def make_sound(self):
+        return "Мяу!"
+
+dog = Dog()
+cat = Cat()
+print(dog.make_sound())
+print(cat.make_sound())</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Гав!
+Мяу!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>class Dog(Animal):</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Использование super()</h3>
+                <p><strong>🔍 Контекст:</strong> Как получить доступ к методам родителя?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Базовый класс <code>Vehicle</code> с методом <code>__init__</code></li>
+                    <li>Класс <code>Truck</code> наследуется от <code>Vehicle</code></li>
+                    <li>Используйте <code>super().__init__()</code> в подклассе</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Vehicle:
+    def __init__(self, brand):
+        self.brand = brand
+
+class Truck(Vehicle):
+    def __init__(self, brand, capacity):
+        super().__init__(brand)
+        self.capacity = capacity
+    
+    def info(self):
+        return f"{self.brand} грузовик, грузоподъёмность: {self.capacity}"
+
+truck = Truck("Volvo", 5000)
+print(truck.info())</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Volvo грузовик, грузоподъёмность: 5000</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>super().__init__()</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Множественное наследование</h3>
+                <p><strong>🔍 Контекст:</strong> Класс может наследоваться от нескольких родителей</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Класс <code>Flyable</code> с методом <code>fly()</code></li>
+                    <li>Класс <code>Swimmable</code> с методом <code>swim()</code></li>
+                    <li>Класс <code>Duck</code> наследуется от обоих</li>
+                    <li>Объект утки может и летать и плыть</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Flyable:
+    def fly(self):
+        return "Летит в небе"
+
+class Swimmable:
+    def swim(self):
+        return "Плывёт по воде"
+
+class Duck(Flyable, Swimmable):
+    def quack(self):
+        return "Кря-кря!"
+
+duck = Duck()
+print(duck.fly())
+print(duck.swim())
+print(duck.quack())</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Летит в небе
+Плывёт по воде
+Кря-кря!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>class Duck(Flyable, Swimmable):</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Проверка типов с isinstance()</h3>
+                <p><strong>🔍 Контекст:</strong> Как узнать, к какому классу принадлежит объект?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Создайте иерархию классов: <code>Shape</code>, <code>Circle</code>, <code>Square</code></li>
+                    <li>Функция <code>describe_shape(shape)</code> определяет тип фигуры</li>
+                    <li>Используйте <code>isinstance()</code> для проверки</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Shape:
+    pass
+
+class Circle(Shape):
+    pass
+
+class Square(Shape):
+    pass
+
+def describe_shape(shape):
+    if isinstance(shape, Circle):
+        return "Это круг!"
+    elif isinstance(shape, Square):
+        return "Это квадрат!"
+    elif isinstance(shape, Shape):
+        return "Это фигура"
+    return "Неизвестная фигура"
+
+circle = Circle()
+square = Square()
+print(describe_shape(circle))
+print(describe_shape(square))</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Это круг!
+Это квадрат!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>isinstance(obj, ClassName)</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 5. Организовать транспортный парк</h3>
                 <p><strong>🔍 Контекст:</strong> От велосипеда до Tesla — всё в одном гараже!</p>
                 
                 <p><strong>⚙️ Техзадание:</strong></p>

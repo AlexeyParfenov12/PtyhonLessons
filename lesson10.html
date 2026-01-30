@@ -720,7 +720,136 @@ help(math)
 
             <h2>Практика</h2>
             <div class="mission">
-                <h3>🎯 Миссия 11: Создать собственный пакет</h3>
+                <h3>Задание 1: Импортировать функцию из модуля</h3>
+                <p><strong>🔍 Контекст:</strong> В модуле math уже есть всё что нужно!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать <code>sqrt</code> из модуля <code>math</code></li>
+                    <li>Функция <code>calculate_diagonal(a, b)</code> вычисляет диагональ прямоугольника</li>
+                    <li>Использовать формулу: диагональ = √(a² + b²)</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>from math import sqrt
+
+def calculate_diagonal(a, b):
+    return sqrt(a**2 + b**2)
+
+print(calculate_diagonal(3, 4))
+# → 5.0</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>5.0
+5.0</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>from math import sqrt</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Создать свой модуль</h3>
+                <p><strong>🔍 Контекст:</strong> Давайте соберём свою библиотеку функций!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Создайте словарь <code>math_functions</code> с функциями</li>
+                    <li>Ключи: "square" (квадрат), "cube" (куб), "double" (удвоение)</li>
+                    <li>Функция <code>apply_function(func_name, value)</code> применяет функцию</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>math_functions = {
+    "square": lambda x: x ** 2,
+    "cube": lambda x: x ** 3,
+    "double": lambda x: x * 2
+}
+
+def apply_function(func_name, value):
+    if func_name in math_functions:
+        return math_functions[func_name](value)
+    return None
+
+print(apply_function("square", 5))
+# → 25</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>25
+125
+10</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте словарь с lambda-функциями</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Импортировать несколько элементов</h3>
+                <p><strong>🔍 Контекст:</strong> Из модуля можно импортировать несколько вещей одновременно</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать <code>pi</code>, <code>cos</code>, <code>sin</code> из <code>math</code></li>
+                    <li>Функция <code>calculate_circle_area(r)</code> вычисляет площадь круга</li>
+                    <li>Функция <code>trig_values(angle)</code> возвращает синус и косинус</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>from math import pi, cos, sin
+
+def calculate_circle_area(r):
+    return pi * r ** 2
+
+def trig_values(angle):
+    return sin(angle), cos(angle)
+
+print(calculate_circle_area(5))
+# → 78.53981633974483
+
+print(trig_values(pi/2))
+# → (1.0, 6.123e-17)</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>78.54
+1.0, 0.0</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>from math import pi, cos, sin</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Использовать библиотеку datetime</h3>
+                <p><strong>🔍 Контекст:</strong> Как работать с датами и временем?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать <code>datetime</code> из модуля <code>datetime</code></li>
+                    <li>Функция <code>get_current_date()</code> возвращает текущую дату</li>
+                    <li>Функция <code>days_until_new_year()</code> считает дни до нового года</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>from datetime import datetime
+
+def get_current_date():
+    return datetime.now()
+
+def days_until_new_year():
+    today = datetime.now()
+    new_year = datetime(today.year + 1, 1, 1)
+    return (new_year - today).days
+
+print(get_current_date())
+# → 2024-12-19 15:30:45.123456
+
+print(days_until_new_year())
+# → 13</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>2024-12-19 15:30:45.123456
+13</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>datetime.now()</code> для текущей даты</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 5. Создать собственный пакет</h3>
                 <p><strong>🔍 Контекст:</strong> Каждый уважающий себя джедай собирает свою библиотеку!</p>
                 
                 <p><strong>⚙️ Техзадание:</strong></p>

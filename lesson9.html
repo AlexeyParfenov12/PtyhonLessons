@@ -748,6 +748,129 @@ except NegativeValueError as e:
 
             <h2>Практика</h2>
             <div class="mission">
+                <h3>Задание 1: Обработать деление на ноль</h3>
+                <p><strong>🔍 Контекст:</strong> Что делать когда пользователь вводит нулевой делитель?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>divide_numbers(a, b)</code> делит два числа</li>
+                    <li>При делении на ноль поймать <code>ZeroDivisionError</code></li>
+                    <li>Вернуть сообщение об ошибке вместо краха программы</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def divide_numbers(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return "Не дели на ноль!"</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>divide_numbers(10, 2)
+# → 5.0
+
+divide_numbers(10, 0)
+# → "Не дели на ноль!"</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>try/except ZeroDivisionError</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Обработать ошибки при доступе к словарю</h3>
+                <p><strong>🔍 Контекст:</strong> Как безопасно получить значение из словаря?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>get_value(data, key)</code> получает значение из словаря</li>
+                    <li>Если ключ не существует — <code>KeyError</code></li>
+                    <li>Обработать ошибку и вернуть сообщение</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def get_value(data, key):
+    try:
+        return data[key]
+    except KeyError:
+        return "Ключ не найден"</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>get_value({"name": "Alice"}, "name")
+# → "Alice"
+
+get_value({"name": "Alice"}, "age")
+# → "Ключ не найден"</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>except KeyError</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Создать пользовательское исключение</h3>
+                <p><strong>🔍 Контекст:</strong> Возраст не может быть отрицательным!</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Создайте класс <code>NegativeValueError</code> (наследуется от Exception)</li>
+                    <li>Функция <code>set_age(age)</code> проверяет возраст</li>
+                    <li>При отрицательном значении поднять <code>NegativeValueError</code></li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class NegativeValueError(Exception):
+    pass
+
+def set_age(age):
+    if age < 0:
+        raise NegativeValueError("Возраст не может быть отрицательным!")
+    return f"Возраст: {age}"
+
+try:
+    print(set_age(25))
+    print(set_age(-5))
+except NegativeValueError as e:
+    print(f"Ошибка: {e}")</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Возраст: 25
+Ошибка: Возраст не может быть отрицательным!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>class MyError(Exception): pass</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Использовать блок finally</h3>
+                <p><strong>🔍 Контекст:</strong> Что-то всегда нужно делать, ошибка или нет</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>safe_operation()</code> с try/except/finally</li>
+                    <li>В try: выполнить какую-то операцию</li>
+                    <li>В except: обработать ошибку</li>
+                    <li>В finally: всегда выполнить очистку</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def safe_operation(data):
+    try:
+        result = data / 2
+        print(f"Результат: {result}")
+    except TypeError:
+        print("Ошибка: нужно число!")
+    finally:
+        print("Операция завершена!")
+
+safe_operation(10)
+safe_operation("text")</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Результат: 5.0
+Операция завершена!
+Ошибка: нужно число!
+Операция завершена!</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Блок <code>finally</code> выполнится в любом случае</p>
+            </div>
+
+            <div class="mission">
                 <h3>🎯 Миссия 10: Стать мастером обработки ошибок</h3>
                 <p><strong>🔍 Контекст:</strong> Идеальный код — как зонтик: должен выдерживать ливень багов!</p>
                 

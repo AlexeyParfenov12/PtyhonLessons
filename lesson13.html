@@ -804,7 +804,148 @@ flask==2.1.0
 
             <h2>Практика</h2>
             <div class="mission">
-                <h3>🎯 Миссия 14: Стать синоптиком</h3>
+                <h3>Задание 1: Использовать библиотеку random</h3>
+                <p><strong>🔍 Контекст:</strong> Нужна случайность для игр и экспериментов</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать <code>randint</code> из <code>random</code></li>
+                    <li>Функция <code>guess_number()</code> загадывает число от 1 до 100</li>
+                    <li>Функция <code>roll_dice()</code> имитирует бросок кубика (1-6)</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>from random import randint
+
+def guess_number():
+    return randint(1, 100)
+
+def roll_dice():
+    return randint(1, 6)
+
+print(f"Загадал число: {guess_number()}")
+print(f"Кубик показал: {roll_dice()}")</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Загадал число: 42
+Кубик показал: 4</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>from random import randint</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Работать с JSON</h3>
+                <p><strong>🔍 Контекст:</strong> JSON — универсальный формат для хранения данных</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать модуль <code>json</code></li>
+                    <li>Функция <code>dict_to_json(data)</code> преобразует словарь в JSON</li>
+                    <li>Функция <code>json_to_dict(json_str)</code> преобразует JSON в словарь</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>import json
+
+def dict_to_json(data):
+    return json.dumps(data)
+
+def json_to_dict(json_str):
+    return json.loads(json_str)
+
+person = {"name": "Алиса", "age": 25}
+json_str = dict_to_json(person)
+print(json_str)
+restored = json_to_dict(json_str)
+print(restored)</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>{"name": "Алиса", "age": 25}
+{'name': 'Алиса', 'age': 25}</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> <code>json.dumps()</code> → строка, <code>json.loads()</code> → объект</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Использовать collections (Counter)</h3>
+                <p><strong>🔍 Контекст:</strong> Как быстро подсчитать количество элементов?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать <code>Counter</code> из <code>collections</code></li>
+                    <li>Функция <code>count_letters(text)</code> подсчитывает буквы</li>
+                    <li>Функция <code>most_common_word(words, n)</code> возвращает N самых частых слов</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>from collections import Counter
+
+def count_letters(text):
+    return Counter(text)
+
+def most_common_word(words, n):
+    word_count = Counter(words)
+    return word_count.most_common(n)
+
+text = "abracadabra"
+print(count_letters(text))
+
+words = ["python", "java", "python", "c++", "python"]
+print(most_common_word(words, 2))</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Counter({'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1})
+[('python', 3), ('java', 1)]</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Counter отлично подходит для подсчётов</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Работать с CSV файлами</h3>
+                <p><strong>🔍 Контекст:</strong> CSV — удобный формат для таблиц данных</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Импортировать модуль <code>csv</code></li>
+                    <li>Функция <code>read_csv(filename)</code> читает CSV файл</li>
+                    <li>Функция <code>write_csv(filename, data)</code> записывает CSV файл</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>import csv
+
+def read_csv(filename):
+    data = []
+    try:
+        with open(filename, 'r') as f:
+            reader = csv.reader(f)
+            data = list(reader)
+    except FileNotFoundError:
+        pass
+    return data
+
+def write_csv(filename, data):
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(data)
+
+students = [
+    ["Имя", "Оценка"],
+    ["Алиса", "90"],
+    ["Боб", "85"]
+]
+
+write_csv("students.csv", students)
+print(read_csv("students.csv"))</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>[['Имя', 'Оценка'], ['Алиса', '90'], ['Боб', '85']]</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> CSV — это табулированные данные, разделённые запятыми</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 5: Стать синоптиком</h3>
                 <p><strong>🔍 Контекст:</strong> Когда API недоступен — делаем погоду сами!</p>
                 
                 <p><strong>⚙️ Техзадание:</strong></p>

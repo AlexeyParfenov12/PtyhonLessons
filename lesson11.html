@@ -799,7 +799,144 @@ print(f"Всего книг: {Book.count}")
 
             <h2>Практика</h2>
             <div class="mission">
-                <h3>🎯 Миссия 12: Создать рыбий патруль</h3>
+                <h3>Задание 1: Создать класс с инициализацией</h3>
+                <p><strong>🔍 Контекст:</strong> Каждый объект нужно правильно создавать</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Создайте класс <code>Person</code> с методом <code>__init__</code></li>
+                    <li>Атрибуты: <code>name</code>, <code>age</code>, <code>city</code></li>
+                    <li>Метод <code>introduce()</code> выводит информацию о человеке</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Person:
+    def __init__(self, name, age, city):
+        self.name = name
+        self.age = age
+        self.city = city
+    
+    def introduce(self):
+        return f"Привет! Я {self.name}, мне {self.age} лет, живу в {self.city}"
+
+person = Person("Алиса", 25, "Москва")
+print(person.introduce())</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Привет! Я Алиса, мне 25 лет, живу в Москва</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>def __init__(self, ...)</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Создать методы класса</h3>
+                <p><strong>🔍 Контекст:</strong> У каждого объекта есть свои действия</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Класс <code>Rectangle</code> с атрибутами <code>width</code> и <code>height</code></li>
+                    <li>Метод <code>area()</code> вычисляет площадь</li>
+                    <li>Метод <code>perimeter()</code> вычисляет периметр</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+    
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+rect = Rectangle(5, 3)
+print(f"Площадь: {rect.area()}")
+print(f"Периметр: {rect.perimeter()}")</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Площадь: 15
+Периметр: 16</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Методы — это функции внутри класса</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Создать список объектов</h3>
+                <p><strong>🔍 Контекст:</strong> Как хранить несколько объектов?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Класс <code>Student</code> с атрибутами <code>name</code> и <code>grade</code></li>
+                    <li>Создайте 3 студента и сохраните их в список</li>
+                    <li>Найдите лучшего студента (с наибольшей оценкой)</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class Student:
+    def __init__(self, name, grade):
+        self.name = name
+        self.grade = grade
+
+students = [
+    Student("Боб", 85),
+    Student("Чарли", 92),
+    Student("Дейв", 78)
+]
+
+best_student = max(students, key=lambda s: s.grade)
+print(f"Лучший студент: {best_student.name} ({best_student.grade})")</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Лучший студент: Чарли (92)</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>max()</code> с <code>key=lambda</code></p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Создать класс с несколькими методами</h3>
+                <p><strong>🔍 Контекст:</strong> Банковский счёт должен уметь пополняться и пустеть</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Класс <code>BankAccount</code> с атрибутом <code>balance</code></li>
+                    <li>Метод <code>deposit(amount)</code> пополняет счёт</li>
+                    <li>Метод <code>withdraw(amount)</code> снимает деньги</li>
+                    <li>Метод <code>get_balance()</code> возвращает остаток</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>class BankAccount:
+    def __init__(self, balance=0):
+        self.balance = balance
+    
+    def deposit(self, amount):
+        self.balance += amount
+        return f"Пополнено на {amount}. Баланс: {self.balance}"
+    
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            return f"Снято {amount}. Баланс: {self.balance}"
+        return "Недостаточно средств"
+    
+    def get_balance(self):
+        return self.balance
+
+account = BankAccount(1000)
+print(account.deposit(500))
+print(account.withdraw(200))</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>Пополнено на 500. Баланс: 1500
+Снято 200. Баланс: 1300</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Проверяйте баланс перед снятием</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 5. Создать рыбий патруль</h3>
                 <p><strong>🔍 Контекст:</strong> Даже Немо нужен классовый подход!</p>
                 
                 <p><strong>⚙️ Техзадание:</strong></p>

@@ -721,7 +721,132 @@ print("Файл успешно скопирован")</code></pre></div>
 
             <h2>Практика</h2>
             <div class="mission">
-                <h3>🎯 Миссия 9: Эмулировать файловую систему</h3>
+                <h3>Задание 1: Подсчитать строки в файле</h3>
+                <p><strong>🔍 Контекст:</strong> Нужно узнать, сколько строк в текстовом файле</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>count_lines(filename)</code> должна открыть файл и подсчитать строки</li>
+                    <li>Если файл не существует, вернуть 0</li>
+                    <li>Не забыть закрыть файл (или использовать <code>with</code>)</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def count_lines(filename):
+    try:
+        with open(filename, 'r') as f:
+            return len(f.readlines())
+    except FileNotFoundError:
+        return 0</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>count_lines("test.txt")
+# → 42
+
+count_lines("nonexistent.txt")
+# → 0</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>readlines()</code> для получения списка строк</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 2: Найти слово в файле</h3>
+                <p><strong>🔍 Контекст:</strong> Как найти нужное слово среди тысяч строк?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>find_word(filename, word)</code> ищет слово в файле</li>
+                    <li>Вернуть номер строки, где оно найдено (1-based)</li>
+                    <li>Если не найдено, вернуть -1</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def find_word(filename, word):
+    try:
+        with open(filename, 'r') as f:
+            for line_num, line in enumerate(f, 1):
+                if word in line:
+                    return line_num
+        return -1
+    except FileNotFoundError:
+        return -1</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>find_word("test.txt", "Python")
+# → 3
+
+find_word("test.txt", "unknown")
+# → -1</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>enumerate()</code> для отслеживания номера строки</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 3: Скопировать файл</h3>
+                <p><strong>🔍 Контекст:</strong> Нужно сделать резервную копию файла</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>copy_file(source, destination)</code> копирует файл</li>
+                    <li>Прочитать содержимое из исходного файла</li>
+                    <li>Записать в новый файл</li>
+                    <li>Вернуть <code>True</code> если успешно, <code>False</code> если ошибка</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def copy_file(source, destination):
+    try:
+        with open(source, 'r') as src:
+            content = src.read()
+        with open(destination, 'w') as dst:
+            dst.write(content)
+        return True
+    except Exception:
+        return False</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>copy_file("original.txt", "backup.txt")
+# → True
+
+copy_file("missing.txt", "backup.txt")
+# → False</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте <code>try/except</code> для обработки ошибок</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 4: Развернуть строки в файле</h3>
+                <p><strong>🔍 Контекст:</strong> Как переписать файл в обратном порядке?</p>
+                
+                <p><strong>⚙️ Техзадание:</strong></p>
+                <ol>
+                    <li>Функция <code>reverse_lines(filename)</code> переворачивает строки</li>
+                    <li>Прочитать все строки из файла</li>
+                    <li>Развернуть их в обратном порядке</li>
+                    <li>Вернуть список строк (без символов новой строки)</li>
+                </ol>
+                
+                <p><strong>Пример кода:</strong></p>
+                <div class="code-block"><pre><code>def reverse_lines(filename):
+    try:
+        with open(filename, 'r') as f:
+            lines = [line.strip() for line in f.readlines()]
+        return lines[::-1]
+    except FileNotFoundError:
+        return []</code></pre></div>
+                
+                <p><strong>Пример вывода:</strong></p>
+                <div class="code-block"><pre><code>reverse_lines("test.txt")
+# → ["последняя строка", "вторая строка", "первая строка"]
+
+reverse_lines("missing.txt")
+# → []</code></pre></div>
+                
+                <p><strong>💡 Подсказка:</strong> Используйте срезы <code>[::-1]</code> для разворота списка</p>
+            </div>
+
+            <div class="mission">
+                <h3>Задание 5. Эмулировать файловую систему</h3>
                 <p><strong>🔍 Контекст:</strong> Когда нет доступа к файлам — создаём свои!</p>
                 
                 <p><strong>⚙️ Техзадание:</strong></p>
