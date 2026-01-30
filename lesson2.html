@@ -644,96 +644,33 @@ else:
 
             <h3>1) Положительное/отрицательное/ноль</h3>
             <p>Введите число — программа определит его знак.</p>
-            <div class="code-block"><pre><code>n = float(input('Введите число: '))
-
-if n > 0:
-    print('Положительное')
-elif n < 0:
-    print('Отрицательное')
-else:
-    print('Ноль')</code></pre></div>
 
             <h3>2) Чётность числа</h3>
             <p>Проверяем, чётное ли целое число.</p>
-            <div class="code-block"><pre><code>num = int(input('Введите целое число: '))
-
-if num % 2 == 0:
-    print('Чётное')
-else:
-    print('Нечётное')</code></pre></div>
 
             <h3>3) Большее из двух чисел</h3>
             <p>Сравните два числа и выведите результат.</p>
-            <div class="code-block"><pre><code>a = float(input('Первое число: '))
-b = float(input('Второе число: '))
-
-if a > b:
-    print('Большее число:', a)
-elif b > a:
-    print('Большее число:', b)
-else:
-    print('Числа равны')</code></pre></div>
+            
 
             <h3>4) Принадлежность диапазону</h3>
             <p>Проверяем, лежит ли число в диапазоне от 10 до 100 (включительно).</p>
-            <div class="code-block"><pre><code>x = float(input('Введите число: '))
-
-if 10 <= x <= 100:
-    print('Число в диапазоне [10, 100]')
-else:
-    print('Число вне диапазона')</code></pre></div>
+            
 
             <h3>5) Количество отрицательных среди трёх чисел</h3>
             <p>Вводим три числа — считаем, сколько из них отрицательные.</p>
-            <div class="code-block"><pre><code>values = [float(input(f'Число {i + 1}: ')) for i in range(3)]
-negatives = sum(1 for v in values if v < 0)
-print('Количество отрицательных:', negatives)</code></pre></div>
+            
 
             <h3>6) Количество корней квадратного уравнения</h3>
             <p>Для ax² + bx + c определяем количество действительных корней.</p>
-            <div class="code-block"><pre><code>a = float(input('a: '))
-b = float(input('b: '))
-c = float(input('c: '))
-
-if a == 0:
-    if b == 0:
-        print('Не уравнение')
-    else:
-        print('Линейное уравнение, 1 корень')
-else:
-    d = b * b - 4 * a * c
-    if d > 0:
-        print('2 действительных корня')
-    elif d == 0:
-        print('1 действительный корень')
-    else:
-        print('Нет действительных корней')</code></pre></div>
+            
 
             <h3>7) Возможность построить треугольник</h3>
             <p>Проверяем неравенство треугольника по трём сторонам.</p>
-            <div class="code-block"><pre><code>s1 = float(input('Сторона 1: '))
-s2 = float(input('Сторона 2: '))
-s3 = float(input('Сторона 3: '))
-
-if s1 + s2 > s3 and s1 + s3 > s2 and s2 + s3 > s1:
-    print('Треугольник существует')
-else:
-    print('Треугольник невозможен')</code></pre></div>
+            
 
             <h3>8) Оценка по баллам</h3>
             <p>Классифицируем оценку: A/B/C/F.</p>
-            <div class="code-block"><pre><code>score = float(input('Введите балл (0-100): '))
-
-if score >= 90:
-    grade = 'A'
-elif score >= 75:
-    grade = 'B'
-elif score >= 50:
-    grade = 'C'
-else:
-    grade = 'F'
-
-print('Оценка:', grade)</code></pre></div>
+            
 
             </div>
         </div>
